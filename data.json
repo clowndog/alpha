@@ -29,6 +29,7 @@
     "name": "Ervin Howell",
     "username": "Antonette",
     "type": "evergreen",
+    "summary": "Blue spruce is a tree that is rarely used for lumber or wood products due to its brittle and knotty wood, but is widely planted in ornamental and general landscape settings because of its cold hardiness, symmetrical pyramidal form, and waxy, blue-hued foliage.",
     "email": "Shanna@melissa.tv",
     "address": {
       "street": "Victor Plains",
@@ -53,6 +54,7 @@
     "name": "Clementine Bauch",
     "username": "Samantha",
     "type": "evergreen",
+    "summary": "Blue spruce is a tree that is rarely used for lumber or wood products due to its brittle and knotty wood, but is widely planted in ornamental and general landscape settings because of its cold hardiness, symmetrical pyramidal form, and waxy, blue-hued foliage.",
     "email": "Nathan@yesenia.net",
     "address": {
       "street": "Douglas Extension",
@@ -75,6 +77,7 @@
   {
     "id": 4,
     "type": "blah",
+    "summary": "Blue spruce is a tree that is rarely used for lumber or wood products due to its brittle and knotty wood, but is widely planted in ornamental and general landscape settings because of its cold hardiness, symmetrical pyramidal form, and waxy, blue-hued foliage.",
     "name": "Patricia Lebsack",
     "username": "Karianne",
     "email": "Julianne.OConner@kory.org",
@@ -99,6 +102,7 @@
   {
     "id": 5,
     "type": "blah",
+    "summary": "Blue spruce is a tree that is rarely used for lumber or wood products due to its brittle and knotty wood, but is widely planted in ornamental and general landscape settings because of its cold hardiness, symmetrical pyramidal form, and waxy, blue-hued foliage.",
     "name": "Chelsey Dietrich",
     "username": "Kamren",
     "email": "Lucio_Hettinger@annie.ca",
@@ -124,7 +128,8 @@
     "id": 6,
     "name": "Mrs. Dennis Schulist",
     "username": "Leopoldo_Corkery",
-        "type": "evergreen",
+    "type": "evergreen",
+    "summary": "Blue spruce is a tree that is rarely used for lumber or wood products due to its brittle and knotty wood, but is widely planted in ornamental and general landscape settings because of its cold hardiness, symmetrical pyramidal form, and waxy, blue-hued foliage.",
     "email": "Karley_Dach@jasper.info",
     "address": {
       "street": "Norberto Crossing",
@@ -148,7 +153,8 @@
     "id": 7,
     "name": "Kurtis Weissnat",
     "username": "Elwyn.Skiles",
-        "type": "blah",
+    "type": "blah",
+    "summary": "Blue spruce is a tree that is rarely used for lumber or wood products due to its brittle and knotty wood, but is widely planted in ornamental and general landscape settings because of its cold hardiness, symmetrical pyramidal form, and waxy, blue-hued foliage.",
     "email": "Telly.Hoeger@billy.biz",
     "address": {
       "street": "Rex Trail",
@@ -172,7 +178,8 @@
     "id": 8,
     "name": "Nicholas Runolfsdottir V",
     "username": "Maxime_Nienow",
-        "type": "evergreen",
+    "type": "evergreen",
+    "summary": "Blue spruce is a tree that is rarely used for lumber or wood products due to its brittle and knotty wood, but is widely planted in ornamental and general landscape settings because of its cold hardiness, symmetrical pyramidal form, and waxy, blue-hued foliage.",
     "email": "Sherwood@rosamond.me",
     "address": {
       "street": "Ellsworth Summit",
@@ -196,7 +203,8 @@
     "id": 9,
     "name": "Glenna Reichert",
     "username": "Delphine",
-        "type": "blah",
+    "type": "blah",
+    "summary": "Blue spruce is a tree that is rarely used for lumber or wood products due to its brittle and knotty wood, but is widely planted in ornamental and general landscape settings because of its cold hardiness, symmetrical pyramidal form, and waxy, blue-hued foliage.",
     "email": "Chaim_McDermott@dana.io",
     "address": {
       "street": "Dayna Park",
@@ -220,7 +228,8 @@
     "id": 10,
     "name": "Clementina DuBuque",
     "username": "Moriah.Stanton",
-        "type": "blah",
+    "type": "blah",
+    "summary": "Blue spruce is a tree that is rarely used for lumber or wood products due to its brittle and knotty wood, but is widely planted in ornamental and general landscape settings because of its cold hardiness, symmetrical pyramidal form, and waxy, blue-hued foliage.",
     "email": "Rey.Padberg@karina.biz",
     "address": {
       "street": "Kattie Turnpike",
