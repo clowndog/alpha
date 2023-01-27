@@ -1,6 +1,6 @@
 [
  {
-   "ID": 1,
+   "id": 1,
    "Available": "Yes",
    "Type": "Evergreen",
    "SubType": "Spruce",
@@ -11,7 +11,7 @@
    "Summary": "Blue spruce is a tree that is rarely used for lumber or wood products due to its brittle and knotty wood, but is widely planted in ornamental and general landscape settings because of its cold hardiness, symmetrical pyramidal form, and waxy, blue-hued foliage."
  },
  {
-   "ID": 2,
+   "id": 2,
    "Available": "Yes",
    "Type": "Evergreen",
    "SubType": "Spruce",
@@ -22,7 +22,7 @@
    "Summary": "The Norway spruce is used primarily for timber and pulpwood, and also for ornamental and Christmas tree purposes."
  },
  {
-   "ID": 3,
+   "id": 3,
    "Available": "Yes",
    "Type": "Evergreen",
    "SubType": "Spruce",
@@ -33,7 +33,7 @@
    "Summary": "White spruce wood is primarily used for construction and prefab housing, but also has uses in furniture, musical instruments, and as a Christmas tree. It also has ecological significance as a food and cover source for wildlife and for soil stability and recreation. It has historical cultural significance for indigenous peoples."
  },
  {
-   "ID": 4,
+   "id": 4,
    "Available": "Yes",
    "Type": "Evergreen",
    "SubType": "Spruce",
@@ -44,7 +44,7 @@
    "Summary": "The Serbian spruce is primarily used for ornamental purposes, such as landscaping and Christmas trees, but it can also be used for construction and paper production."
  },
  {
-   "ID": 5,
+   "id": 5,
    "Available": "Yes",
    "Type": "Evergreen",
    "SubType": "Spruce",
@@ -55,7 +55,7 @@
    "Summary": "The primary use of Black Hills spruce wood is for lumber and wood products, as well as for ornamental and Christmas trees, due to its strong wood and attractive blue-green color."
  },
  {
-   "ID": 6,
+   "id": 6,
    "Available": "Yes",
    "Type": "Evergreen",
    "SubType": "Spruce",
@@ -66,7 +66,7 @@
    "Summary": "The primary use of black spruce wood is for pulp, and it is also used for fuel, Christmas trees, and other products, while it is the provincial tree of Newfoundland."
  },
  {
-   "ID": 7,
+   "id": 7,
    "Available": "Yes",
    "Type": "Evergreen",
    "SubType": "Spruce",
