@@ -1,0 +1,79 @@
+[
+ {
+   "id": 1,
+   "available": "Yes",
+   "type": "Deciduous",
+   "subtype": "Spruce",
+   "name": "Colorado Blue Spruce",
+   "latin": "Picea pungens 'glauca'",
+   "cultivars": "",
+   "content": "6-9\"2-01.2549.42609-15\"2-01.558.93108-12\"2-1, P+1*2.512477510-18\"2-1, P+1*2.75137.686012-18\"2-2, P+2*3.5172.8108018-30\"2-2, P+2*5.25230.41440",
+   "summary": "Blue spruce is a tree that is rarely used for lumber or wood products due to its brittle and knotty wood, but is widely planted in ornamental and general landscape settings because of its cold hardiness, symmetrical pyramidal form, and waxy, blue-hued foliage."
+ },
+ {
+   "id": 2,
+   "available": "Yes",
+   "type": "Evergreen",
+   "subtype": "Spruce",
+   "name": "Norway Spruce",
+   "latin": "Picea abies",
+   "cultivars": "",
+   "content": "10-18\"2-01.562.733018-24\"2-0278.8541514-20\"2-13147.292016-24\"2-24.25192120024-36\"2-2, 2-35.25259.21620",
+   "summary": "The Norway spruce is used primarily for timber and pulpwood, and also for ornamental and Christmas tree purposes."
+ },
+ {
+   "id": 3,
+   "available": "Yes",
+   "type": "Evergreen",
+   "subtype": "Spruce",
+   "name": "White Spruce",
+   "latin": "Picea glauca",
+   "cultivars": "",
+   "content": "10-18\"2-01.559.8531518-24\"2-0278.8541512-18\"2-12.7514087514-20\"2-24182.4114020-30\"2-25230.41440",
+   "summary": "White spruce wood is primarily used for construction and prefab housing, but also has uses in furniture, musical instruments, and as a Christmas tree. It also has ecological significance as a food and cover source for wildlife and for soil stability and recreation. It has historical cultural significance for indigenous peoples."
+ },
+ {
+   "id": 4,
+   "available": "Yes",
+   "type": "Evergreen",
+   "subtype": "Spruce",
+   "name": "Serbian Spruce",
+   "latin": "Picea omorika",
+   "cultivars": "",
+   "content": "8-14\"2-01.566.535010-18\"2-13.25155 --",
+   "summary": "The Serbian spruce is primarily used for ornamental purposes, such as landscaping and Christmas trees, but it can also be used for construction and paper production."
+ },
+ {
+   "id": 5,
+   "available": "Yes",
+   "type": "Evergreen",
+   "subtype": "Spruce",
+   "name": "Black Hills Spruce",
+   "latin": "Picea glauca 'densata'",
+   "cultivars": "",
+   "content": "4-7\"2-01.2555.12907-10\"2-01.570.33707-12\"2-13142.48908-16\"2-24.5201.61260",
+   "summary": "The primary use of Black Hills spruce wood is for lumber and wood products, as well as for ornamental and Christmas trees, due to its strong wood and attractive blue-green color."
+ },
+ {
+   "id": 6,
+   "available": "Yes",
+   "type": "Evergreen",
+   "subtype": "Spruce",
+   "name": "Black Spruce",
+   "latin": "Picea mariana",
+   "cultivars": "",
+   "content": "6-10\"2-01.2557.9530510-18\"2-01.57640018-24\"2-0295.95505",
+   "summary": "The primary use of black spruce wood is for pulp, and it is also used for fuel, Christmas trees, and other products, while it is the provincial tree of Newfoundland."
+ },
+ {
+   "id": 7,
+   "available": "Yes",
+   "type": "Evergreen",
+   "subtype": "Spruce",
+   "name": "Red Spruce",
+   "latin": "Picea rubens",
+   "cultivars": "",
+   "content": "5-10\"2-01.580.7542510-18\"2-01.7599.75525",
+   "summary": "Red spruce is primarily used for pulpwood and lumber, but it is also used for Christmas trees, fuel, and musical instruments."
+ }
+]
