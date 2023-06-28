@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishlist</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="navigation.js" defer></script>
+    <script src="wishlist.js" defer></script>
+  </head>
+
+  <body>
+    <img src="assets/logo.png" alt="Company Logo" class="logo" />
+    <div id="mySidebar" class="sidebar">
+      <a href="#" class="closebtn" onclick="closeNav()">×</a>
+      <a href="index.html">Home</a>
+      <a href="catalog.html">Catalog</a>
+      <a href="resources.html">Resources</a>
+      <a href="about.html">About</a>
+    </div>
+    <button class="openbtn" onclick="openNav()">☰</button>
+    <div class="main">
+      <br />
+      <br />
+      <h1>Wishlist</h1>
+      <p>Fill out your information and send us an inquiry.</p>
+      <ul id="wishlist-items"></ul>
+      <form
+        id="email-form"
+        action="mailto:info@alphanurseries.com"
+        method="POST"
+        enctype="text/plain"
+      >
+        <label for="customer-email"></label>
+        <input
+          type="email"
+          id="customer-email"
+          name="customer-email"
+          placeholder="Email"
+          required
+        />
+        <label for="subject"></label>
+        <input type="text" id="subject" name="subject" placeholder="Subject" />
+        <label for="message"></label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Message"
+          class="message-box"
+        ></textarea>
+        <div class="order-form-section">
+          <br />
+          <table id="wishlist-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Size</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+              <tr class="grand-total">
+                <td>Grand Total</td>
+                <td></td>
+                <td></td>
+                <td id="grand-total">0.00</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+          <br />
+        </div>
+        <input type="submit" value="Send" id="send-button" />
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <script src="script.js" defer></script>
+    <title>Catalog</title>
+  </head>
+  <body>
+    <img src="logo.png" alt="Company Logo" class="logo">
+    <div id="video-container">
+      <video id="video-bg" autoplay loop muted>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div id="mySidebar" class="sidebar">
+      <a href="#" class="closebtn" onclick="closeNav()">×</a>
+      <a href="catalog.html">Catalog</a>
+      <a href="#" id="arrow-icon" onclick="expandResources(); toggleArrow();" class="resources-arrow">Resources <span class="arrow"></span></a>
+      <div id="resources" style="display:none" class="resource-links">
+        <a href="#">Resource 1</a>
+        <a href="#">Resource 2</a>
+        <a href="#">Resource 3</a>
+      </div>
+      <a href="about.html">About</a>
+    </div>
+    <button class="openbtn" onclick="openNav()">☰</button>    
+    <div class="main" id="logoani">
+      <br><br><br><br><br>
+        <img src="logo.png" alt="Company Logo" class="logo2">
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+        <div class="footer-dark">
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 item">
+                            <h3>Services</h3>
+                            <ul>
+                                <li><a href="#">Product Catalog</a></li>
+                                <li><a href="#">Consultation</a></li>
+                                <li><a href="#">Resources</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-md-3 item">
+                            <h3>About</h3>
+                            <ul>
+                                <li><a href="#">Mission</a></li>
+                                <li><a href="#">Team</a></li>
+                                <li><a href="#">Careers</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 item text">
+                            <h3>Alpha Nurseries, Inc.</h3>
+                            <p>Alpha Nurseries, Inc is a wholesale seedling nursery located in Holland, MI. We grow both conifers and
+                              broadleaves; in trees and shrubs. We specialize in growing bare-root woody plants.</p>
+                        </div>
+                        <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+                    </div>
+                    <p class="copyright">Alpha Nurseries, Inc. © 2023</p>
+                </div>
+            </footer>
+        </div>
+            <!-- Credit to https://epicbootstrap.com/snippets/footer-dark -->
+    </body>
+    </html>
