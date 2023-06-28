@@ -696,7 +696,7 @@ input:checked+.slider:before {
 
 .footer .row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
 }
 
@@ -704,10 +704,6 @@ input:checked+.slider:before {
   flex: 1 1 300px;
   padding: 10px;
   text-align: left;
-}
-
-.footer .item.text {
-  margin-bottom: 36px;
 }
 
 .footer .item.text p {
@@ -720,7 +716,7 @@ input:checked+.slider:before {
   display: block;
   margin: 0 auto;
   width: auto;
-  height: 50px;
+  height: 35px;
 }
 
 
@@ -732,6 +728,18 @@ input:checked+.slider:before {
 }
 
 @media (max-width: 991px) {
+  .footer .row {
+    flex-wrap: wrap !important;
+    justify-content: center;
+  }
+
+  .footer .item {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
+@media (max-width: 576px) {
   .footer .row {
     flex-direction: column;
   }
