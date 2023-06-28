@@ -59,6 +59,10 @@ html {
   opacity: 1;
 }
 
+.spacer {
+  height: 1200px;
+  /* adjust this value according to your needs */
+}
 
 #video-container {
   position: fixed;
@@ -107,13 +111,15 @@ html {
   color: #818181;
   display: block;
   transition: 0.3s;
+  white-space: nowrap;
+
 }
 
 .sidebar a:hover {
   color: #fff;
 }
 
-.resources-arrow {
+.resources-text-arrow {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -153,13 +159,14 @@ html {
   transition: transform 333ms ease-out, color 333ms;
   color: #818181;
   text-align: center;
-  font-size: 60%;
-  transform-origin: center center;
+  font-size: 70%;
 }
 
 .arrow.expanded {
-  transform: rotate(-180deg);
+  transform: scaleY(-1);
+  /* Flip the arrow vertically */
 }
+
 
 .resource-links {
   display: none;
@@ -174,7 +181,6 @@ html {
   color: #585858;
 
 }
-
 
 
 /* #endregion*/
@@ -707,6 +713,7 @@ input:checked+.slider:before {
 .footer .item.text p {
   opacity: 0.6;
   margin-bottom: 0;
+  font-size: 14px;
 }
 
 .footer .item.logofooter img {
