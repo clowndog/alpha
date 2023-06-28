@@ -1,17 +1,13 @@
 /* #region main */
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  /* Set the body to full height */
-}
-
-body {
+body,
+html {
+  overscroll-behavior: none;
+  /* ADDED THIS */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* Arrange the body content in a column */
+  margin: 0;
 }
 
 .main {
@@ -20,6 +16,11 @@ body {
   font-family: helvetica;
   font-size: 20px;
   position: relative;
+}
+
+.main-content {
+  /* ADDED THIS */
+  flex-grow: 1;
 }
 
 .logomain {
@@ -36,11 +37,10 @@ body {
 /* #region homepage */
 
 .animation {
-  flex: 1;
-  /* Take up remaining vertical space */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-family: "Helvetica", Arial, sans-serif;
   color: white;
   font-size: 1.9em;
@@ -49,11 +49,14 @@ body {
 
 .quote {
   text-align: center;
+  position: absolute;
+  top: calc(100% + 20px);
+  left: 50%;
+  transform: translateX(-50%);
   font-family: "Helvetica", Arial, sans-serif;
   color: white;
   font-size: 0.8em;
   opacity: 1;
-  margin-bottom: 20px;
 }
 
 
@@ -658,8 +661,6 @@ input:checked+.slider:before {
   background-color: #000000;
   font-family: helvetica;
   border-top: 15px solid #282d32;
-  margin-top: auto;
-  /* Push the footer to the bottom */
 }
 
 .footer h3 {
@@ -687,21 +688,14 @@ input:checked+.slider:before {
   opacity: 0.8;
 }
 
-.footer .container {
-  display: flex;
-  flex-direction: column;
-  /* Arrange the footer content in a column */
-  height: 100%;
-  /* Make the container take up full height */
-}
-
 .footer .row {
-  flex: 1;
-  /* Distribute remaining vertical space equally among rows */
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .footer .item {
+  flex: 1 1 300px;
   padding: 10px;
   text-align: left;
 }
@@ -722,10 +716,6 @@ input:checked+.slider:before {
   height: 50px;
 }
 
-.footer .row:last-child {
-  margin-top: auto;
-  /* Push the last row to the bottom */
-}
 
 .footer .copyright {
   text-align: center;
