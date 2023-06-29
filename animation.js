@@ -84,3 +84,75 @@ window.addEventListener("scroll", () => {
     });
   }
 });
+
+// resources page toggle arrow
+
+let isProgrammaticScroll = false;
+
+window.addEventListener("scroll", () => {
+  if (!isProgrammaticScroll && window.scrollY === 0) {
+    document.querySelector(".toggle-up").style.opacity = "0";
+  }
+  isProgrammaticScroll = false;
+});
+
+function scrollToPreviousSection() {
+  const sections = [...document.querySelectorAll(".main > .headspacer")];
+  const currentIndex = sections.findIndex(
+    (section) => section.id === window.location.hash.slice(1)
+  );
+  const previousSection = sections[currentIndex - 1];
+  const upArrow = document.querySelector(".toggle-up");
+
+  if (previousSection) {
+    const previousId = previousSection.id;
+    previousSection.id = "";
+    isProgrammaticScroll = true;
+    previousSection.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      window.location.hash = `#${previousId}`;
+      previousSection.id = previousId;
+    }, 500);
+    upArrow.style.opacity = "1"; // Make the up arrow visible
+  } else if (currentIndex === 0) {
+    const topElement = document.getElementById("top");
+    topElement.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      window.location.hash = "#top";
+    }, 500);
+  }
+}
+
+function scrollToNextSection() {
+  const sections = [...document.querySelectorAll(".main > .headspacer")];
+  let currentIndex = sections.findIndex(
+    (section) => section.id === window.location.hash.slice(1)
+  );
+  const upArrow = document.querySelector(".toggle-up");
+
+  if (currentIndex === -1) {
+    // If we're at the top of the page
+    currentIndex = 0; // Set currentIndex to 0 so that we scroll to the first section
+  }
+
+  const nextSection = sections[currentIndex + 1];
+  if (nextSection) {
+    const nextId = nextSection.id;
+    nextSection.id = "";
+    nextSection.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      window.location.hash = `#${nextId}`;
+      nextSection.id = nextId;
+    }, 500);
+    upArrow.style.opacity = "1"; // Make the up arrow visible
+  } else {
+    const topElement = document.getElementById("top");
+    topElement.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      window.location.hash = "#top";
+    }, 500);
+    upArrow.style.opacity = "0"; // Make the up arrow invisible
+  }
+}
+
+document.querySelector(".toggle-up").style.opacity = "0";
