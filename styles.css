@@ -17,6 +17,11 @@ html {
   position: relative;
 }
 
+.main h1 {
+  width: 750px;
+  margin: 0 auto;
+}
+
 .main-content {
   flex-grow: 1;
 }
@@ -100,6 +105,10 @@ html {
 
 .quote.show {
   opacity: 1;
+}
+
+.headspacer {
+  height: 150px;
 }
 
 .spacer {
