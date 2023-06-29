@@ -12,7 +12,6 @@ html {
 .main {
   margin: 0 auto;
   max-width: 750px;
-  /* Updated width to 750px */
   font-family: Helvetica;
   font-size: 20px;
   position: relative;
@@ -52,7 +51,6 @@ html {
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-  /* adjust this value as needed */
 }
 
 .circle {
@@ -63,30 +61,25 @@ html {
   background-color: none;
   margin: 0 30px;
   margin-bottom: 30px;
-  /* This adds horizontal margin, adjust this value as needed */
   opacity: 0;
   transition: opacity 1s;
 }
 
 .future-link:nth-of-type(1) .circle {
   transition-delay: 0.2s;
-  /* Adjust the delay as needed */
 }
 
 .future-link:nth-of-type(2) .circle {
   transition-delay: 0.4s;
-  /* Adjust the delay as needed */
 }
 
 .future-link:nth-of-type(3) .circle {
   transition-delay: 0.6s;
-  /* Adjust the delay as needed */
 }
 
 .circle:hover {
   border-color: #3e8e41;
 }
-
 
 .quote {
   display: flex;
@@ -134,7 +127,6 @@ html {
   transform: translate(-50%, -50%);
 }
 
-
 /* #endregion*/
 
 /* #region navigation */
@@ -161,7 +153,6 @@ html {
   display: block;
   transition: 0.3s;
   white-space: nowrap;
-
 }
 
 .sidebar a:hover {
@@ -213,9 +204,7 @@ html {
 
 .arrow.expanded {
   transform: scaleY(-1);
-  /* Flip the arrow vertically */
 }
-
 
 .resource-links {
   display: none;
@@ -238,7 +227,6 @@ html {
   will-change: transform;
 }
 
-/* Styles for send wishlist button with heart */
 .wishlist-heart {
   display: inline-flex;
   align-items: center;
@@ -278,7 +266,6 @@ html {
   color: white;
 }
 
-/* Styles for clear wishlist button with 'X' in a black circle */
 .wishlist-clear-btn {
   display: inline-flex;
   align-items: center;
@@ -299,8 +286,6 @@ html {
   background-color: red;
   color: white;
 }
-
-
 
 .wishlist-button {
   position: absolute;
@@ -347,7 +332,6 @@ table td {
 .user-cards {
   margin: 0 auto;
   width: 750px;
-  /* Set the width to 750px */
   display: grid;
   font-family: helvetica;
   color: white;
@@ -489,7 +473,6 @@ body.resource-mode {
   font-family: helvetica;
   margin: 0 auto;
   width: 750px;
-  /* Set the width to 750px */
   margin-bottom: 15px;
 }
 
@@ -602,15 +585,12 @@ textarea:focus {
   margin-right: 1rem;
 }
 
-
-
 /* #endregion */
 
 /* #region wishlist */
 
 .wishlistbackground {
   background-color: #a6a6a6;
-  /* This is a shade of grey. */
 }
 
 table#wishlist-table td:nth-child(2) input[type="number"] {
@@ -720,7 +700,7 @@ table#wishlist-table select:hover {
   right: 0;
   bottom: 0;
   background-color: gray;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 34px;
 }
 
@@ -732,7 +712,7 @@ table#wishlist-table select:hover {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 
@@ -811,7 +791,6 @@ input:checked+.slider:before {
   width: auto;
   height: 35px;
 }
-
 
 .footer .copyright {
   text-align: center;
