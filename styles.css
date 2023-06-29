@@ -42,11 +42,56 @@ html {
   transform: translate(-50%, -50%);
   font-family: "Helvetica", Arial, sans-serif;
   color: white;
-  font-size: 1.9em;
+  font-size: 2em;
   opacity: 0;
 }
 
+#future-content-links {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  /* adjust this value as needed */
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #bebebe;
+  background-color: none;
+  margin: 0 30px;
+  margin-bottom: 30px;
+  /* This adds horizontal margin, adjust this value as needed */
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.future-link:nth-of-type(1) .circle {
+  transition-delay: 0.2s;
+  /* Adjust the delay as needed */
+}
+
+.future-link:nth-of-type(2) .circle {
+  transition-delay: 0.4s;
+  /* Adjust the delay as needed */
+}
+
+.future-link:nth-of-type(3) .circle {
+  transition-delay: 0.6s;
+  /* Adjust the delay as needed */
+}
+
+.circle:hover {
+  border-color: #3e8e41;
+}
+
+
 .quote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   position: relative;
   top: calc(100% + 20px);
@@ -193,17 +238,69 @@ html {
   will-change: transform;
 }
 
-#clear-wishlist {
-  position: fixed !important;
+/* Styles for send wishlist button with heart */
+.wishlist-heart {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
   bottom: 20px;
   right: 20px;
+  color: black;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
 
-#wishlist-submit-button {
-  position: fixed !important;
-  bottom: 50px;
-  right: 20px;
+.wishlist-heart i {
+  font-size: 50px;
+  color: white;
 }
+
+.wishlist-heart span {
+  position: absolute;
+  font-size: 14px;
+  color: black;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wishlist-heart:hover {
+  color: white;
+}
+
+.wishlist-heart:hover i {
+  color: red;
+}
+
+.wishlist-heart:hover span {
+  color: white;
+}
+
+/* Styles for clear wishlist button with 'X' in a black circle */
+.wishlist-clear-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  border: none;
+  outline: none;
+}
+
+.wishlist-clear-btn:hover {
+  background-color: red;
+  color: white;
+}
+
+
 
 .wishlist-button {
   position: absolute;
@@ -324,7 +421,6 @@ body.resource-mode {
   background-color: black;
   color: white;
 }
-
 
 .tree-svg {
   filter: invert(1);
@@ -474,7 +570,7 @@ input::-webkit-search-cancel-button {
 }
 
 #email-form input[type="submit"] {
-  background-color: #4caf50;
+  background-color: #3e8e41;
   color: #fff;
   border: none;
   cursor: pointer;

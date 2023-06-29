@@ -12,11 +12,6 @@
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"
     ></script>
-    <script type="text/javascript">
-      (function () {
-        emailjs.init("RYRyCisbSaLO-meXP"); // Make sure to replace 'YOUR_USER_ID' with your actual EmailJS user ID
-      })();
-    </script>
   </head>
   <body class="wishlistbackground">
     <img src="assets/logo.png" alt="Company Logo" class="logomain" />
@@ -118,6 +113,11 @@
           <br />
         </div>
         <input type="submit" value="Send" id="send-button" />
+        <div id="thankyou" class="hide">
+          <h1>
+            Thanks for sending your Wishlist, we will be contacting you shortly.
+          </h1>
+        </div>
       </form>
       <br />
     </div>

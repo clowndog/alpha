@@ -24,7 +24,7 @@ window.addEventListener("load", () => {
   };
   window.requestAnimationFrame(fadeIn);
 
-  const quoteFadeFactor = 2;
+  const quoteFadeFactor = 1.5;
   const fadeFactor = 2.5;
   window.addEventListener("scroll", () => {
     const scrolled = window.pageYOffset;
@@ -60,4 +60,27 @@ window.addEventListener("load", () => {
   adjustVideoOpacity();
 
   window.addEventListener("scroll", adjustVideoOpacity);
+});
+
+//content circle animation
+
+window.addEventListener("scroll", function () {
+  let links = document.getElementById("future-content-links");
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    links.style.opacity = "1";
+  }
+});
+
+window.addEventListener("scroll", () => {
+  const scrollHeight = window.pageYOffset;
+  const docHeight =
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
+
+  if (scrollHeight === docHeight) {
+    const circles = document.querySelectorAll(".circle");
+    circles.forEach((circle) => {
+      circle.style.opacity = "1";
+    });
+  }
 });

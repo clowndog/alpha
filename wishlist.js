@@ -1,5 +1,29 @@
 // wishlist
 
+function saveFormData() {
+  const form = document.getElementById("email-form");
+  const formData = Array.from(form.elements).reduce((data, element) => {
+    if (element.name && element.value) {
+      data[element.name] = element.value;
+    }
+    return data;
+  }, {});
+
+  localStorage.setItem("formData", JSON.stringify(formData));
+}
+
+function loadFormData() {
+  const form = document.getElementById("email-form");
+  const savedFormData = JSON.parse(localStorage.getItem("formData") || "{}");
+
+  for (let key in savedFormData) {
+    const element = form.elements.namedItem(key);
+    if (element) {
+      element.value = savedFormData[key];
+    }
+  }
+}
+
 function formatPhoneNumber(input) {
   let phoneNumber = input.value.replace(/\D/g, "");
 
@@ -56,6 +80,7 @@ function updateGrandTotal() {
 document.addEventListener("DOMContentLoaded", () => {
   createWishlistTable();
   updateGrandTotal();
+  loadFormData();
 });
 
 const createWishlistTable = () => {
@@ -289,7 +314,6 @@ document.getElementById("email-form").addEventListener("submit", (event) => {
   document.getElementById("formatted-table").value = formattedTable;
   const formattedTableValue = document.getElementById("formatted-table").value;
 
-  // Send email using EmailJS
   const emailParams = {
     customerName: customerName,
     customerPhone: customerPhone,
@@ -300,7 +324,6 @@ document.getElementById("email-form").addEventListener("submit", (event) => {
     grand_total: grandTotal,
   };
 
-  // Send the email using EmailJS
   emailjs
     .send(
       "service_v3fnwk5",
@@ -310,10 +333,11 @@ document.getElementById("email-form").addEventListener("submit", (event) => {
     )
     .then((response) => {
       console.log("Email sent!", response.status, response.text);
-      // Reset the form or show a success message
+      localStorage.removeItem("formData");
     })
     .catch((error) => {
       console.error("Error sending email:", error);
-      // Handle error, show an error message, etc.
     });
 });
+
+document.getElementById("email-form").addEventListener("change", saveFormData);

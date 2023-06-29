@@ -27,6 +27,10 @@
       }
     </style>
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
     <script src="navigation.js" defer></script>
     <script src="catalog.js" defer></script>
     <title>Catalog</title>
@@ -48,11 +52,12 @@
       <h1>Catalog</h1>
       <p>A new way to find plant sizing & pricing by name & category.</p>
       <br />
-      <span id="wishlist-count" style="display: none">0</span>
-      <button id="wishlist-submit-button">
-        Send Wishlist (<span id="wishlist-count-display">0</span>)
+      <button id="wishlist-submit-button" class="wishlist-heart">
+        <i class="fas fa-heart"></i><span id="wishlist-count-display">0</span>
       </button>
-      <button id="clear-wishlist">Clear Wishlist</button>
+      <button id="clear-wishlist" class="wishlist-clear-btn">
+        <i class="fas fa-times"></i>
+      </button>
       <br />
     </div>
     <div class="search-wrapper">
