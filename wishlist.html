@@ -8,8 +8,16 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="navigation.js" defer></script>
     <script src="wishlist.js" defer></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("RYRyCisbSaLO-meXP"); // Make sure to replace 'YOUR_USER_ID' with your actual EmailJS user ID
+      })();
+    </script>
   </head>
-
   <body class="wishlistbackground">
     <img src="assets/logo.png" alt="Company Logo" class="logomain" />
     <div id="mySidebar" class="sidebar">

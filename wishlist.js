@@ -9,7 +9,7 @@ function formatPhoneNumber(input) {
   }
 }
 
-const userEmail = "info@alphanurseries.com";
+const userEmail = "stephenbusscher@gmail.com";
 
 const getWishlist = () => {
   const wishlist = localStorage.getItem("wishlist");
@@ -229,6 +229,8 @@ const createWishlistTable = () => {
   tbody.appendChild(emptyRow);
 };
 
+emailjs.init("RYRyCisbSaLO-meXP");
+
 document.getElementById("email-form").addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -287,13 +289,31 @@ document.getElementById("email-form").addEventListener("submit", (event) => {
   document.getElementById("formatted-table").value = formattedTable;
   const formattedTableValue = document.getElementById("formatted-table").value;
 
-  const userEmail = "info@alphanurseries.com";
-  const emailBody = formattedTable.trim();
+  // Send email using EmailJS
+  const emailParams = {
+    customerName: customerName,
+    customerPhone: customerPhone,
+    customerEmail: customerEmail,
+    customerAddress: customerAddress,
+    message: message,
+    wishlist: formattedTable,
+    grand_total: grandTotal,
+  };
 
-  window.location.href = `mailto:${userEmail}?subject=Wishlist&body=${encodeURIComponent(
-    emailBody
-  )}`;
+  // Send the email using EmailJS
+  emailjs
+    .send(
+      "service_v3fnwk5",
+      "template_5x4lgtb",
+      emailParams,
+      "RYRyCisbSaLO-meXP"
+    )
+    .then((response) => {
+      console.log("Email sent!", response.status, response.text);
+      // Reset the form or show a success message
+    })
+    .catch((error) => {
+      console.error("Error sending email:", error);
+      // Handle error, show an error message, etc.
+    });
 });
-
-createWishlistTable();
-updateGrandTotal();
