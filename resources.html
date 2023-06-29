@@ -6,62 +6,101 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <script src="navigation.js" defer></script>
+  <script src="resources.js" defer></script>
   <title>Resources</title>
 </head>
 
 <body>
+  <div id="top"></div>
   <img src="assets/logo.png" alt="Company Logo" class="logomain">
-  <div id="mySidebar" class="sidebar">
+  <nav id="mySidebar" class="sidebar">
     <a href="#" class="closebtn" onclick="closeNav()">×</a>
-    <a href="index.html">Home</a>
     <a href="catalog.html">Catalog</a>
-    <a href="resources.html">Resources</a>
+    <a href="#" id="arrow" onclick="expandResources();" style="align-items: center">
+      <span class="resources-text-arrow">
+        Resources
+        <i class="fas fa-chevron-down arrow"></i>
+      </span>
+    </a>
+    <div id="resources" style="display: none" class="resource-links">
+      <a href="resources.html#greetings" class="small-link">Greetings</a>
+      <a href="resources.html#faq" class="small-link">FAQs</a>
+      <a href="resources.html#legal" class="small-link">Legal</a>
+    </div>
+    <a href="bearlake.html">Bear Lake</a>
     <a href="about.html">About</a>
-  </div>
+  </nav>
   <button class="openbtn" onclick="openNav()">☰</button>
+  <div class="toggle-arrow toggle-up" onclick="scrollToPreviousSection()">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+  <div class="toggle-arrow toggle-down" onclick="scrollToNextSection()">
+    <i class="fas fa-chevron-down"></i>
+  </div>
   <div class="main">
     <div class="headspacer"></div>
     <h1>Resources</h1>
+    <br>
     <p>Here's where you can find out more about the nursery and check in on our projects!</p>
     <br>
     <iframe
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116486.15594288487!2d-86.26058432107806!3d42.68359810331929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8819f6d01a69c977%3A0x58a95e534aaa9207!2sAlpha%20Nurseries!5e1!3m2!1sen!2sus!4v1679518783355!5m2!1sen!2sus"
-      style="width: 100%; height: 250px; border:4px solid #000; filter: grayscale(100%) contrast(150%);"
+      style="width: 100%; height: 250px; border:4px solid #000;"
       allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <div class="headspacer"></div>
-    <h2 id="info">Greetings</h2>
-    Welcome to each of you, past customers and prospective - alike! July 1, 2022
-
+    <div class="headspacer" id="greetings"></div>
+    <h2>Greetings (July 1, 2022)</h2>
+    <br>
+    Welcome to each of you, past customers and prospective - alike!
+    <br>
+    <br>
     <b>Is the Coronavirus really behind us?</b> Happily, the nursery has been relatively unaffected by the virus since
     June of 2020. We understand that is not everyone's experience by far. We are sorry if you experienced loss.
-
-    <b>Prices: </b> Inflation is real and largely the product of politician's attempts to make sure we had extra money
+    <br>
+    <br>
+    <b>Prices:</b>
+    <br>
+    <br>
+    Inflation is real and largely the product of politician's attempts to make sure we had extra money
     to get through Covid. In our view, blame is equally shared among Trump's PPP program, Biden's huge spending and the
     Treasury's attempts to increase the money supply. Good thing the BBB proposal didn't go through or the prices we all
     pay for groceries, gas, etc would be even higher! Because of their poor stewardship of the economy, our prices are
     raised. My advice is to vote for candidates that have better economic advisors, as this is a DISASTER!
-
-    <b>A quick reminder of important terms to help us do a better job of serving you:</b> <br><br>
-
+    <br>
+    <br>
+    <b>A quick reminder of important terms to help us do a better job of serving you:</b>
+    <br>
+    <br>
     Reductions to orders accepted till <u>March 15th. After that, you may add to your order but not subtract.</u>
-    <br><br>
     If an order is cancelled after March 15th, 50% of the order total is payable; if before that date--then 25%.
     Note that all orders placed are based on the full terms and conditions of our company as listed on page 19.
-    <b>The effects of very high demand:</b> <br><br>
-
+    <br>
+    <br>
+    <b>The effects of very high demand:</b>
+    <br>
+    <br>
     <u>Allocation:</u> We are moving more toward a system of allocating inventory - so there are more plants available
     for smaller growers. Practically, this means that there are less evergreen plants available for 1000 rate sales.
-    <br><br>
-    <u>Price increases:</u> See above to reference the reasons for this. <br><br>
+    <br>
+    <br>
+    <u>Price increases:</u> See above to reference the reasons for this.
+    <br>
+    <br>
     <u>Increased Production:</u> While we're always on the lookout for additional ground, we are limited in production
-    to our current acreage so we are not able to balance increased demand with increased production. <br><br>
+    to our current acreage so we are not able to balance increased demand with increased production.
+    <br>
+    <br>
     Now on to <span style="color:#FF0033;font-weight:bold;">what's new </span>or deserves special note: As in prior
     years, our new native offerings are printed in <span style="color:#FF0033;font-weight:bold;">RED</span> ink.
     <br>
-
-    <b>Notable misses for this year are:</b> Am. Crabapple, Showy Mtn Ash, Sassafras, Wahoo, Creep. Juniper, Apricot.
-
+    <br>
+    <b>Notable misses for this year are:</b>
+    <br>
+    <br>
+    Am. Crabapple, Showy Mtn Ash, Sassafras, Wahoo, Creep. Juniper, Apricot.
+    <br>
+    <br>
     <b>Note: Minimum quantity to order per species is the bundle size.</b> We will no longer be able to process orders
     in less than bundle size quantities. Minimum order per species/size is the appropriate bundle size quantity.
     <br>
@@ -81,8 +120,10 @@
     We supply many districts with plants for their annual sales. Since districts generally act as a local distributor,
     we offer a discount on the pricing for those orders compared to normal catalog terms.
     <span style="color:#FF0033;font-weight:bold;">
-      <u> Again in 2022-23, for Conservation Districts</u>: please limit your order to 22 species or less. </span>
-
+      <u>Again in 2022-23, for Conservation Districts</u>: please limit your order to 22 species or less.
+    </span>
+    <br>
+    <br>
     <b> We need to minimize order variety to be more efficient for orders shipped in April... Thank you.
     </b>
     <br>
@@ -92,38 +133,45 @@
     </span> Note that if actual cost of shipping product is greater than the flat charge, we will bill you for the
     difference after we ship.
     <br>
-    This catalog
-
-    <b>assumes</b> that you know what species you need for your project. Call if you need help!
-    Often, the easiest way to gain information is to do an internet search. The following are good sites:
+    <br>
+    This catalog <b>assumes</b> that you know what species you need for your project. Call if you need help!
+    Often, the easiest way to gain information is to do an internet search.
+    <br>
+    <br>
+    <b>The following are good sites:</b>
+    <br>
     <br>
     <a href="http://www.fs.fed.us/database/feis/plants/" alt="USDA Forest Service" id="item" class="eleven">
       http://www.fs.fed.us/database/feis/plants/
     </a>
+    <br>
     <a href="http://www.hort.uconn.edu/plants/" alt="Plant UConn Database" id="item" class="eleven">
       http://www.hort.uconn.edu/plants/
     </a>
+    <br>
     <a href="http://plants.usda.gov" alt="US Department Of Agriculture" id="item" class="eleven">
       http://plants.usda.gov (Native plants information)
     </a>
     <br>
+    <br>
 
     On our website, <b>click on the name of a plant</b> to bring up specific info on each plant we grow.
-
+    <br>
     <br>
     If you haven’t tried us yet, we encourage you to do so. We filled over 1600 orders this year - thank you for your
     trust!
     <br>
+    <br>
     Best Regards,
+    <br>
     <br>
     Jeff Busscher
     President
     Alpha Nurseries, Inc.
-    <div class="headspacer"></div>
-    <h2 id="faq">Frequently Asked Questions</h2>
+    <div class="headspacer" id="faq"></div>
+    <h2>Frequently Asked Questions</h2>
     <br>
     <br>
-
     <b>How do I find out current availability?</b>
     <br>
     We do not post availability online. Please give us a call (269 857 7804) for an updated list of what's available.
@@ -211,32 +259,38 @@
       (one or two boxes) you can empty the box and store the bag with trees in your refrigerator for a couple weeks with
       no trouble--but keep it pretty tightly sealed to keep the plant roots moist. An extra benefit of taking your order
       early is that if we have an unexpected inventory issue, it will probably not show up on your order!
-      <div class="headspacer"></div>
-      <h2 id="legal">Terms & Conditions</h2>
+      <div class="headspacer" id="legal"></div>
+      <h2>Terms & Conditions</h2>
       <br>
-
       Seedling orders over 25 per size/species must be in increments of bundle sizes.-- ie., 25, 50, 75 etc., 25%
       deposit due with order.
+      <br>
       <br>
       <span style="color:#FF0033;font-weight:bold;">
         No reductions to orders allowed after March 15th.
       </span>
       <br>
+      <br>
       <span style="color:#FF0033;font-weight:bold;">
         Order Cancellations after March 15th, forfeit 50% of the order.
       </span>
       <br>
+      <br>
       Minimum order is $150.00.
       <br>
+      <br>
       <u>5% discount for orders over $10,000</u>--under most circumstances--fall orders generally excluded.
+      <br>
       <br>
       Balance of payment
       <span style="font-weight:bold;">
         due 14 days prior to planned shipment date, unless other arrangements have been agreed to.
       </span>
       <br>
+      <br>
       <span style="color:#FF0033;font-weight:bold;">
         Shipping: UPS, 15% of total order </span> - or - at cost for actual costs over the 15% charge. FOB, Holland, MI
+      <br>
       <br>
       <span style="font-weight:bold;">
         Minimum shipping charge for UPS orders is $37.50
@@ -249,8 +303,13 @@
       Cancellations forfeit deposit paid in most circumstances.
       <br>
       <br>
-      Sizing: Sizes are estimated in June for the current crop. Sometimes exact sizes may vary from published sizes
+      <b>Sizing:</b>
+      <br>
+      <br>
+      Sizes are estimated in June for the current crop. Sometimes exact sizes may vary from published sizes
       for this reason. Normally, 95% (+/- 5%) of plants should be in the published (estimated) size range.
+      <br>
+      <br>
       Bundle sizes:
       <span style="font-weight:bold;">
         Evergreen Seedlings:
@@ -272,15 +331,13 @@
         “Bigger Stuff”:
       </span>
       25 or 10/bundle
-
       <br>
-
+      <br>
       <span style="font-weight:bold;">
         Warranty, Limitation of liability and Disclaimer:
       </span>
-
       <br>
-
+      <br>
       Alpha Nurseries, Inc. (A.N.I.) makes no warranty regarding its products, merchantability or any
       other type of guarantee, express or implied. All of our material is sold true to form and general
       species characteristics. All plant material will be shipped in good condition, in proper packaging
@@ -293,15 +350,13 @@
       advised of the possibility of such losses. Recognizing our dependency on and exposure to the
       elements, all orders are subject to crop conditions. A few of such (but not limited to) are listed
       here: Hail, Frost, Inventory error, Flooding, Fungal infections and Insect damage.
-
       <br>
-
+      <br>
       <span style="font-weight:bold;">
         Failure to pay when credit has been extended:
       </span>
-
       <br>
-
+      <br>
       A.N.I. charges interest for outstanding balances, with the first charges assessed via statement 60 days after
       shipment. Interest is calculated from the date of shipment as payment is due prior to shipment.
       <span style="font-weight:bold;">
@@ -314,56 +369,80 @@
       Any dispute will be resolved exclusively in the State of Michigan, and buyer consents to jurisdiction in
       Michigan.” Any dispute will be resolved exclusively in the State of Michigan, and buyer consents to jurisdiction
       in Michigan.
-
       <br>
-
+      <br>
       <span style="font-weight:bold;">
         Corrections to inventory:
       </span>
-
       <br>
-
+      <br>
       While a conservative and accurate inventory is our goal, at times we do
       not have enough plants to fill all our orders. Our policy in those cases is to share the impact of
       that reality as broadly as possible to make any change to your order - a minor impact.
-
       <br>
-
+      <br>
       <span style="font-weight:bold;">
         Deposits:
       </span>
-
       <br>
-
+      <br>
       Orders for which a deposit is not received will be
-      <span style="font-weight:bold;">
-
-
-
-        acknowledged
-      </span>
+      <span style="font-weight:bold;">acknowledged</span>
       but
       <span style="font-weight:bold;">
         <i>not confirmed</i>
       </span>
       until the deposit is paid. Our goal is the fair and equitable treatment of all of our customers. Demand is high
       and we need to verify customer commitment via the deposit system for our stock.
-
       <br>
-
+      <br>
       <span style="font-weight:bold;">
         Aside from the legal statement,
       </span>
-
-      <br>
-
       we want you to know that we will do everything possible to make your experience with Alpha Nurseries, Inc. a
       pleasant one - and our goal is to see our plant material does well on your site. While our legal responsibility
       ends when the stock leaves the door in good condition, we will try to go the extra mile wherever we can.
-
-      <br>
   </div>
+  <div class="headspacer"></div>
 </body>
-
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="item">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="#">Product Catalog</a></li>
+          <li><a href="#">Consultation</a></li>
+          <li><a href="#">Resources</a></li>
+        </ul>
+      </div>
+      <div class="item">
+        <h3>About</h3>
+        <ul>
+          <li><a href="#">Mission</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="item text">
+        <h3>Alpha Nurseries, Inc.</h3>
+        <p>
+          Alpha Nurseries, Inc is a wholesale seedling nursery located in
+          Holland, MI. We grow both conifers and broadleaves; in trees and
+          shrubs. We specialize in growing bare-root woody plants.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="item logofooter">
+        <img src="assets/logo.png" alt="Company Logo" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="item">
+        <p class="copyright">Alpha Nurseries, Inc. © 2023</p>
+      </div>
+    </div>
+  </div>
+</footer>
 </html>
-<div class="headspacer"></div>

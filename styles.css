@@ -519,7 +519,27 @@ input::-webkit-search-cancel-button {
 
 /* #region resources */
 
+.toggle-arrow {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #000;
+  transition: color 0.3s ease;
+}
 
+.toggle-arrow:hover {
+  color: #f1f1f1;
+}
+
+.toggle-up {
+  bottom: 50px;
+}
+
+.toggle-down {
+  bottom: 20px;
+}
 
 /* #endregion */
 
