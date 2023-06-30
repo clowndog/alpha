@@ -6,6 +6,7 @@ const openNav = () => {
 
 const closeNav = () => {
   document.getElementById("mySidebar").style.width = "0";
+  event.preventDefault();
 };
 
 const expandResources = () => {
