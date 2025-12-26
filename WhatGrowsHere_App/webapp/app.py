@@ -6,14 +6,12 @@
 ╚══════════════════════════════════════════════════════════════════════════════╝
 """
 
-from flask import Flask, render_template, request, jsonify, send_file
-from flask_cors import CORS
-import csv
-import os
-import json
-from collections import defaultdict
-import io
-import base64
+import logging
+import sys
+
+# Configure logging
+logging.basicConfig(stream=sys.stdout, level=logging.INFO, 
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 app = Flask(__name__)
 CORS(app)
@@ -21,7 +19,7 @@ CORS(app)
 # ============================================================================
 # CONFIGURATION & CONSTANTS
 # ============================================================================
-
+logging.info("Application starting up...")
 STATE_ABBREVS = {
     'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas',
     'CA': 'California', 'CO': 'Colorado', 'CT': 'Connecticut', 'DE': 'Delaware',
@@ -57,6 +55,7 @@ class SpeciesDatabase:
         self.species_info = {}
         self.county_species_sets = {}
         self.loaded = False
+        logging.info("SpeciesDatabase initialized.")
 
     def normalize_fips(self, fips_raw):
         """Standardize FIPS to 5 digits."""
@@ -65,6 +64,7 @@ class SpeciesDatabase:
         return str(fips_raw).split('.')[0].strip().zfill(5)
 
     def load(self, master_csv, species_csv):
+        logging.info(f"Attempting to load data from: {master_csv} and {species_csv}")
         try:
             # 1. Load Species Metadata
             with open(species_csv, 'r', encoding='utf-8') as f:
@@ -81,6 +81,7 @@ class SpeciesDatabase:
                             'latin': row.get('Latin Name', '').strip(),
                             'category': row.get('Category', 'Other').strip()
                         }
+            logging.info(f"Loaded {len(self.species_info)} species metadata records.")
 
             # 2. Load County Data
             with open(master_csv, 'r', encoding='utf-8') as f:
@@ -109,6 +110,8 @@ class SpeciesDatabase:
                             temp_storage[fips] = temp_storage[fips].union(active_species)
                         else:
                             temp_storage[fips] = active_species
+            
+            logging.info(f"Loaded {len(self.counties)} county records.")
 
             # 3. Apply Maryland/Virginia Fixes
             self.county_species_sets = temp_storage.copy()
@@ -122,24 +125,27 @@ class SpeciesDatabase:
                     self.county_species_sets[child] = temp_storage[parent]
 
             self.loaded = True
+            logging.info("Database load successful.")
             return True
 
         except Exception as e:
-            print(f"Error loading DB: {e}")
+            logging.error(f"CRITICAL: Error loading DB: {e}", exc_info=True)
             return False
 
     def get_counties_in_state(self, state):
+        logging.info(f"get_counties_in_state called for state: '{state}'. Total counties in memory: {len(self.counties)}")
         if not state:
             return []
         state_u = state.upper()
         seen = set()
         results = []
         for c in self.counties:
-            if c['STATE_NAME'].upper() == state_u:
-                name = c['NAME']
-                if name not in seen:
+            if c.get('STATE_NAME', '').upper() == state_u:
+                name = c.get('NAME', '')
+                if name and name not in seen:
                     results.append(name)
                     seen.add(name)
+        logging.info(f"Found {len(results)} counties for state '{state}'.")
         return sorted(results)
 
     def lookup(self, county_name, state_name):
@@ -148,8 +154,8 @@ class SpeciesDatabase:
 
         target = None
         for row in self.counties:
-            if row['STATE_NAME'].upper() == t_state:
-                r_county = row['NAME'].upper().replace(" COUNTY", "").strip()
+            if row.get('STATE_NAME', '').upper() == t_state:
+                r_county = row.get('NAME', '').upper().replace(" COUNTY", "").strip()
                 if t_county == r_county:
                     target = row
                     break
@@ -172,8 +178,8 @@ class SpeciesDatabase:
 
         return {
             'found': True,
-            'county': target['NAME'],
-            'state': target['STATE_NAME'],
+            'county': target.get('NAME', ''),
+            'state': target.get('STATE_NAME', ''),
             'fips': fips,
             'total': len(active_cols),
             'species_set': list(active_cols),
@@ -192,16 +198,22 @@ db = SpeciesDatabase()
 
 def get_data_path(filename):
     """Get path to data files"""
+    logging.info(f"Searching for data file: {filename}")
     # Try webapp/data first
     webapp_data = os.path.join(os.path.dirname(__file__), 'data', filename)
+    logging.info(f"Checking path: {webapp_data}")
     if os.path.exists(webapp_data):
+        logging.info(f"Found data file at: {webapp_data}")
         return webapp_data
 
     # Try parent data folder
     parent_data = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', filename)
+    logging.info(f"Checking path: {parent_data}")
     if os.path.exists(parent_data):
+        logging.info(f"Found data file at: {parent_data}")
         return parent_data
 
+    logging.warning(f"Data file not found: {filename}")
     return None
 
 # Load database on startup
@@ -209,10 +221,10 @@ master_csv = get_data_path('master_species_distribution_data.csv')
 species_csv = get_data_path('species_name_master.csv')
 
 if master_csv and species_csv:
+    logging.info("Required CSV files found. Calling db.load().")
     db.load(master_csv, species_csv)
-    print("Database loaded successfully!")
 else:
-    print("WARNING: Could not find data files!")
+    logging.error("CRITICAL: Could not find one or more required data files on startup.")
 
 # ============================================================================
 # ROUTES
