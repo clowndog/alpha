@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const API_URL = 'https://gis-7t7s.onrender.com';
+  const API_URL = 'https://alpha-gis.onrender.com';
 
   const stateSelect = document.getElementById('state-select');
   const countySelect = document.getElementById('county-select');
