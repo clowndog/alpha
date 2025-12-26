@@ -8,24 +8,22 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
     <script src="navigation.js" defer></script>
-    <script src="animation.js" defer></script>
-    <title>Catalog</title>
+    <script src="gis.js" defer></script>
+    <title>GIS Explorer</title>
   </head>
   <body>
     <header>
       <img src="assets/logo.png" alt="Company Logo" class="logomain" />
     </header>
     <main class="main-content">
-      <div id="video-container">
-        <video id="video-bg" autoplay loop muted>
-          <source
-            src="https://github.com/clowndog/alpha/raw/main/background.mp4"
-            type="video/mp4"
-          />
-        </video>
-      </div>
       <nav id="mySidebar" class="sidebar">
         <a href="#" class="closebtn" onclick="closeNav()">×</a>
         <a href="catalog.html">Catalog</a>
@@ -44,34 +42,26 @@
           <a href="resources.html#greetings" class="small-link">Greetings</a>
           <a href="resources.html#faq" class="small-link">FAQs</a>
           <a href="resources.html#legal" class="small-link">Legal</a>
-          <a href="gis.html" class="small-link">Plant GIS</a>
         </div>
         <a href="bearlake.html">Bear Lake</a>
         <a href="about.html">About</a>
       </nav>
       <button class="openbtn" onclick="openNav()">☰</button>
       <section class="animation" id="animation">
-        <h1>Welcome to Alpha.</h1>
+        <h1>GIS Explorer</h1>
       </section>
       <div class="spacer"></div>
-      <section class="quote">
-        <div id="future-content-links">
-          <a href="link1.html" class="future-link"
-            ><div class="circle"></div
-          ></a>
-          <a href="link2.html" class="future-link"
-            ><div class="circle"></div
-          ></a>
-          <a href="link3.html" class="future-link"
-            ><div class="circle"></div
-          ></a>
-        </div>
-        <h2 class="quote-text">
-          Alpha Nurseries, Inc is a wholesale seedling nursery located in
-          Holland, MI. We grow both conifers and broadleaves; in trees and
-          shrubs. We specialize in growing bare-root woody plants.
-        </h2>
-      </section>
+      <div class="main">
+        <section class="gis-container">
+          <div id="gis-controls">
+            <select id="state-select"><option>Select a State</option></select>
+            <select id="county-select"><option>Select a County</option></select>
+            <button id="search-button">Search</button>
+          </div>
+          <div id="map"></div>
+          <div id="gis-results"></div>
+        </section>
+      </div>
     </main>
     <footer class="footer">
       <div class="container">

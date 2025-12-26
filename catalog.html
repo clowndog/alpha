@@ -38,13 +38,29 @@
 
   <body>
     <img src="assets/logo.png" alt="Company Logo" class="logomain" />
-    <div id="mySidebar" class="sidebar">
-      <a href="#" class="closebtn" onclick="closeNav()">×</a>
-      <a href="index.html">Home</a>
-      <a href="catalog.html">Catalog</a>
-      <a href="resources.html">Resources</a>
-      <a href="about.html">About</a>
-    </div>
+    <nav id="mySidebar" class="sidebar">
+        <a href="#" class="closebtn" onclick="closeNav()">×</a>
+        <a href="catalog.html">Catalog</a>
+        <a
+          href="#"
+          id="arrow"
+          onclick="expandResources();"
+          style="align-items: center"
+        >
+          <span class="resources-text-arrow">
+            Resources
+            <i class="fas fa-chevron-down arrow"></i>
+          </span>
+        </a>
+        <div id="resources" style="display: none" class="resource-links">
+          <a href="resources.html#greetings" class="small-link">Greetings</a>
+          <a href="resources.html#faq" class="small-link">FAQs</a>
+          <a href="resources.html#legal" class="small-link">Legal</a>
+          <a href="gis.html" class="small-link">Plant GIS</a>
+        </div>
+        <a href="bearlake.html">Bear Lake</a>
+        <a href="about.html">About</a>
+      </nav>
     <button class="openbtn" onclick="openNav()">☰</button>
     <div class="main">
       <div class="headspacer"></div>
