@@ -8,11 +8,15 @@
 
 import logging
 import sys
+import os
+import csv # <-- Added this line
+from flask import Flask, render_template, request, jsonify, send_file
+from flask_cors import CORS
+from collections import defaultdict # <-- Added this line
 
 # Configure logging
-logging.basicConfig(stream=sys.stdout, level=logging.INFO, 
+logging.basicConfig(stream=sys.stdout, level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
-
 app = Flask(__name__)
 CORS(app)
 
@@ -308,4 +312,4 @@ def export_data(format):
 # ============================================================================
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)
