@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('gis.js script loaded and running!');
   const API_URL = 'https://alpha-gis.onrender.com';
 
   const stateSelect = document.getElementById('state-select');
