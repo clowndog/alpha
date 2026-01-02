@@ -6,14 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const countySelect = document.getElementById('county-select');
   const searchButton = document.getElementById('search-button');
   const resultsDiv = document.getElementById('gis-results');
+  const heatmapLegendDiv = document.getElementById('heatmap-legend');
   
   let geojsonLayer = null;
   let countiesData = null;
 
   // 1. Initialize Leaflet Map
   const map = L.map('map').setView([39.8283, -98.5795], 4);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CartoDB</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
   }).addTo(map);
 
   // 2. Pre-fetch GeoJSON data
@@ -83,6 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     resultsDiv.innerHTML = `<p>Searching for species in ${county}, ${state}...</p>`;
+    // Hide results and legend while searching
+    resultsDiv.style.display = 'none';
+    heatmapLegendDiv.style.display = 'none'; // NEW
     searchButton.disabled = true;
 
     try {
@@ -97,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!searchResult.found) {
         resultsDiv.innerHTML = `<p>No species data found for ${county}, ${state}.</p>`;
+        resultsDiv.style.display = 'block'; // Show message
         return;
       }
 
@@ -113,10 +120,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Step 3: Draw heatmap on map
       drawHeatmap(heatmapData, searchResult.total);
+      // The heatmapLegendDiv is now shown inside drawHeatmap
 
     } catch (error) {
       console.error('Search failed:', error);
       resultsDiv.innerHTML = `<p>An error occurred during the search. Please try again.</p>`;
+      resultsDiv.style.display = 'block'; // Show error message
     } finally {
       searchButton.disabled = false;
     }
@@ -133,10 +142,17 @@ document.addEventListener('DOMContentLoaded', () => {
       html += `</ul>`;
     }
     resultsDiv.innerHTML = html;
+    resultsDiv.style.display = 'block';
   }
 
   // 7. Draw Heatmap on the map
   function drawHeatmap(heatmapData, maxScore) {
+    console.log('drawHeatmap called:'); // RE-ADDED DEBUG LOG
+    console.log('  maxScore:', maxScore); // RE-ADDED DEBUG LOG
+    console.log('  heatmapData sample:', Object.entries(heatmapData).slice(0, 5)); // RE-ADDED DEBUG LOG
+    window.logCounter = 0; // Reset counter for limited logging
+
+
     if (geojsonLayer) {
       map.removeLayer(geojsonLayer);
     }
@@ -146,21 +162,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getColor(score) {
-        if (score === 0 || maxScore === 0) return '#FFFFFF'; // White for no matches
+        if (score === 0 || maxScore === 0) return '#f7f7f7'; // Light grey for no matches
         const ratio = score / maxScore;
-        return ratio > 0.8 ? '#800026' :
-               ratio > 0.6 ? '#BD0026' :
-               ratio > 0.4 ? '#E31A1C' :
-               ratio > 0.2 ? '#FC4E2A' :
-               ratio > 0.1 ? '#FD8D3C' :
-               ratio > 0.0 ? '#FEB24C' :
-                             '#FFFFFF';
+        // Using a green scale for "growing" plants
+        return ratio > 0.75 ? '#005a32' : // Darkest Green (High Similarity)
+               ratio > 0.50 ? '#238b45' :
+               ratio > 0.25 ? '#43a2ca' : // Medium Green
+               ratio > 0.05 ? '#7bccc4' : // Lighter Green
+               ratio > 0.00 ? '#bae4bc' : // Very Light Green (Low Similarity)
+                             '#f7f7f7'; // Light grey for no match
     }
 
     geojsonLayer = L.geoJson(countiesData, {
       style: function(feature) {
-        const fips = feature.properties.FIPS;
+        const fips = feature.id; // Corrected: FIPS is in feature.id
         const score = heatmapData[fips] || 0;
+        const ratio = maxScore > 0 ? score / maxScore : 0; // RE-ADDED for logging
+        
+        // RE-ADDED DEBUG LOG, now with a limit
+        if (window.logCounter < 20) { // Log only first 20 features
+            console.log('  Feature FIPS:', fips, 'Score:', score, 'Ratio:', ratio.toFixed(2), 'Color:', getColor(score));
+            window.logCounter++;
+        }
+        
         return {
           fillColor: getColor(score),
           weight: 1,
@@ -178,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
                     l.bringToFront();
                 }
-                const fips = feature.properties.FIPS;
+                const fips = feature.id; // Corrected: FIPS is in feature.id
                 const score = heatmapData[fips] || 0;
                 l.bindTooltip(`<b>${feature.properties.NAME}</b><br>${score} matching species`).openTooltip();
             },

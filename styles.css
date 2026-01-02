@@ -901,19 +901,71 @@ input:checked+.slider:before {
   height: 500px;
   border-radius: 1rem;
   border: 2px solid black;
+  margin-bottom: 2rem; /* Add spacing below the map */
+}
+
+/* Heatmap Legend Styling */
+.heatmap-legend {
+  width: 100%;
+  padding: 1rem;
+  background: transparent;
+  border: 1px solid black;
+  border-radius: 1rem;
+  color: #333;
+  margin-top: 1rem; /* Spacing above the legend */
+  margin-bottom: 2rem; /* Consistent spacing below */
+  display: none; /* Hidden by default */
+  font-size: 0.9em;
+}
+
+.heatmap-legend h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: black;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+
+.legend-color-box {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #777;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
 }
 
 #gis-results {
   width: 100%;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid white;
+  background: transparent;
+  border: 1px solid black;
   border-radius: 1rem;
-  color: white;
+  color: #333;
+  display: none; /* Hide initially */
+  margin-bottom: 2rem; /* Add spacing below */
 }
 
 #gis-results h3, #gis-results h4 {
-    color: white;
+    color: black; /* Dark text color for headings */
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
 }
+
+#gis-results ul {
+    list-style-type: disc; /* Use disc for list items */
+    margin-left: 1.5rem;
+    padding-left: 0;
+}
+
+#gis-results li {
+    margin-bottom: 0.2rem;
+    line-height: 1.4;
+    color: #444; /* Slightly lighter dark text for list items */
+}
+
 
 /* #endregion */
