@@ -18,7 +18,7 @@ from collections import defaultdict # <-- Added this line
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["http://localhost:8888", "https://alpha-gis.onrender.com"])
 
 # ============================================================================
 # CONFIGURATION & CONSTANTS
