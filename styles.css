@@ -17,20 +17,20 @@ html {
   --wishlist-icon-size: 50px;
   --wishlist-clear-size: 20px;
   --alpha-red: #d82020;
-  --alpha-green: #3e8e41;
+  --alpha-green: #33bd38;
   --ink: #111;
   --black: #000;
   --white: #fff;
-  --muted: #6f6b63;
-  --nav-muted: #818181;
+  --muted: var(--page-gray);
+  --nav-muted: var(--page-gray);
   --line: rgba(17, 17, 17, 0.14);
   --page-cream: #f4f1ea;
   --page-cream-rgb: 244, 241, 234;
-  --page-gray: #a6a6a6;
-  --page-gray-rgb: 166, 166, 166;
+  --page-gray: #b8b8b8;
+  --page-gray-rgb: 184, 184, 184;
   --page-white-rgb: 255, 255, 255;
   --header-fade-rgb: var(--page-white-rgb);
-  --footer-text: #f0f9ff;
+  --footer-text: var(--white);
   overscroll-behavior: none;
   min-height: 100vh;
   display: flex;
@@ -80,7 +80,7 @@ html {
   font-weight: 400;
   line-height: 1.3;
   margin: 0;
-  padding-left: 1rem;
+  padding-left: 0.35rem;
   text-align: left;
 }
 
@@ -133,7 +133,7 @@ body:has(.catalog-page) {
   object-fit: contain;
   display: block;
   filter: invert(1);
-  transition: filter 180ms ease, transform 180ms ease;
+  transition: filter 180ms ease;
 }
 
 .logo-link {
@@ -154,7 +154,6 @@ body:has(.catalog-page) {
 .logo-link:focus-visible .logomain {
   filter: invert(45%) sepia(31%) saturate(921%) hue-rotate(73deg)
     brightness(91%) contrast(88%);
-  transform: scale(1.04);
 }
 
 /* #endregion*/
@@ -305,13 +304,13 @@ body:has(.catalog-page) {
   text-decoration: none;
   font-size: 1.25rem;
   font-family: helvetica;
-  color: var(--nav-muted);
+  color: var(--page-gray);
   transition: 0.3s;
   white-space: nowrap;
 }
 
 .sidebar a:hover {
-  color: #fff;
+  color: var(--white);
 }
 
 .resources-text-arrow {
@@ -323,11 +322,11 @@ body:has(.catalog-page) {
 }
 
 .resources-arrow:hover {
-  color: #fff;
+  color: var(--white);
 }
 
 .resources-arrow:hover .arrow {
-  color: #fff;
+  color: var(--white);
 }
 
 .sidebar .closebtn {
@@ -376,12 +375,20 @@ body:has(.catalog-page) {
 }
 
 .openbtn:hover {
-  color: white;
+  color: var(--white);
 }
 
 .openbtn.nav-open {
-  color: white;
+  color: var(--white);
   z-index: 1201;
+}
+
+body:has(.page-content):not(.wishlistbackground) .openbtn:not(.nav-open):hover {
+  color: var(--page-gray);
+}
+
+.openbtn.nav-open:hover {
+  color: var(--alpha-red);
 }
 
 .openbtn.nav-open::before {
@@ -402,7 +409,7 @@ body:has(.catalog-page) {
   height: 1em;
   cursor: pointer;
   transition: transform 333ms ease-out, color 333ms;
-  color: var(--nav-muted);
+  color: var(--page-gray);
   text-align: center;
   font-size: 0.62em;
   line-height: 1;
@@ -430,7 +437,7 @@ body:has(.catalog-page) {
 .resource-links a {
   margin-left: 0;
   padding-left: calc(var(--page-edge) + 2rem);
-  color: var(--nav-muted);
+  color: var(--page-gray);
 }
 
 /* #endregion*/
@@ -540,7 +547,7 @@ body:has(.catalog-page) {
   background-color: transparent;
   border: none;
   border-radius: 999px;
-  color: var(--nav-muted);
+  color: var(--page-gray);
   cursor: pointer;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1rem;
@@ -550,7 +557,7 @@ body:has(.catalog-page) {
   transform: none;
   appearance: none;
   -webkit-appearance: none;
-  transition: color 100ms ease, background-color 100ms ease, transform 100ms ease;
+  transition: color 100ms ease, background-color 100ms ease;
 }
 
 .wishlist-button i {
@@ -568,10 +575,6 @@ body:has(.catalog-page) {
 
 .wishlist-button.active {
   color: var(--alpha-red);
-}
-
-.wishlist-button:active {
-  transform: scale(0.94);
 }
 
 table {
@@ -613,14 +616,12 @@ table td {
   border-radius: 1.25rem;
   padding: 1rem;
   box-shadow: 0 18px 40px rgba(17, 17, 17, 0.05);
-  transition: border-color 180ms ease, box-shadow 180ms ease,
-    transform 180ms ease;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .card:hover {
   border-color: rgba(17, 17, 17, 0.28);
   box-shadow: 0 24px 48px rgba(17, 17, 17, 0.08);
-  transform: translateY(-1px);
 }
 
 .card>.header {
@@ -633,7 +634,7 @@ table td {
 
 .card>.body {
   font-size: 0.8rem;
-  color: var(--muted);
+  color: var(--page-gray);
 }
 
 .card>.summary {
@@ -677,7 +678,7 @@ table td {
 }
 
 .card th {
-  color: var(--muted);
+  color: var(--page-gray);
   font-size: 0.72rem;
   font-weight: 600;
 }
@@ -788,7 +789,7 @@ input {
 }
 
 input::placeholder {
-  color: var(--nav-muted);
+  color: var(--page-gray);
 }
 
 .search-wrapper input,
@@ -825,7 +826,7 @@ input::placeholder {
 }
 
 .search-wrapper option {
-  color: #111;
+  color: var(--ink);
 }
 
 .search-wrapper input:focus,
@@ -858,7 +859,7 @@ input:focus {
 input::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;
-  color: #fff;
+  color: var(--white);
 }
 
 /* #endregion*/
@@ -876,7 +877,7 @@ input::-webkit-search-cancel-button {
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
-  color: #000;
+  color: var(--black);
   transition: color 0.3s ease;
   z-index: 1201;
 }
@@ -954,7 +955,7 @@ input::-webkit-search-cancel-button {
 }
 
 #email-form input[type="submit"]:disabled {
-  background-color: var(--nav-muted);
+  background-color: var(--page-gray);
   cursor: wait;
 }
 
@@ -987,7 +988,7 @@ input::-webkit-search-cancel-button {
 .email-status-icon {
   width: 28px;
   height: 28px;
-  border: 4px solid var(--nav-muted);
+  border: 4px solid var(--page-gray);
   border-top-color: var(--alpha-green);
   border-radius: 50%;
   flex-shrink: 0;
@@ -1239,6 +1240,131 @@ table#wishlist-table .td-total {
 
 /* #endregion */
 
+/* #region support pages */
+
+.support-page {
+  padding-bottom: 4rem;
+}
+
+.resource-map {
+  width: 100%;
+  height: 250px;
+  border: 4px solid var(--black);
+}
+
+.resource-grid,
+.resource-card-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 2rem 0;
+}
+
+.resource-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.resource-grid a,
+.resource-card-list a,
+.resource-download {
+  display: block;
+  padding: 1rem;
+  border: 2px solid var(--black);
+  border-radius: 1rem;
+  color: var(--black);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.5);
+  transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease;
+}
+
+.resource-grid a:hover,
+.resource-card-list a:hover,
+.resource-download:hover {
+  color: var(--alpha-green);
+  border-color: var(--alpha-green);
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.resource-section {
+  margin: 3rem 0;
+  scroll-margin-top: calc(var(--header-fade-height) + 1rem);
+}
+
+.resource-section h2,
+.story-section h2 {
+  margin: 0 0 1rem;
+  font-size: 1.6rem;
+}
+
+.resource-section h3 {
+  margin: 1.5rem 0 0.35rem;
+  font-size: 1rem;
+}
+
+.resource-date {
+  margin-top: -0.5rem;
+  color: var(--page-gray);
+}
+
+.story-section img {
+  display: block;
+  width: 100%;
+  max-height: 440px;
+  object-fit: cover;
+  margin: 1.5rem 0;
+  border-radius: 1rem;
+}
+
+.story-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.story-gallery img {
+  height: 180px;
+  margin: 0;
+}
+
+.bearlake-archive table,
+.bearlake-archive tbody,
+.bearlake-archive tr,
+.bearlake-archive td {
+  display: block;
+  width: 100% !important;
+}
+
+.bearlake-archive h4 {
+  margin: 3rem 0 1rem;
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+
+.bearlake-archive h6,
+.bearlake-archive .big {
+  display: block;
+  margin: 0;
+  font-size: var(--type-body-size);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.bearlake-archive img {
+  display: block;
+  float: none !important;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0 !important;
+  border-radius: 1rem;
+}
+
+.bearlake-archive .thick-divider {
+  margin: 3rem 0;
+  border: 0;
+  border-top: 2px solid var(--black);
+}
+
+/* #endregion */
+
 /* #region slider (resource mode) */
 
 .switch {
@@ -1262,7 +1388,7 @@ table#wishlist-table .td-total {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--nav-muted);
+  background-color: var(--page-gray);
   transition: 0.4s;
   border-radius: 34px;
 }
@@ -1600,7 +1726,7 @@ input:checked+.slider:before {
 }
 
 #gis-controls button:disabled {
-  background-color: var(--nav-muted);
+  background-color: var(--page-gray);
   cursor: not-allowed;
 }
 
@@ -1672,7 +1798,7 @@ input:checked+.slider:before {
 #gis-results li {
     margin-bottom: 0.2rem;
     line-height: 1.4;
-    color: var(--muted);
+    color: var(--page-gray);
 }
 
 

@@ -147,7 +147,8 @@ The goal is to improve the current static HTML/CSS/JavaScript site carefully, on
 - [ ] Replace Font Awesome CDN with local SVG icons that match the current icon artwork.
 - [ ] Keep local icons in `assets/icons/` once the artwork is approved.
 - [ ] Standardize repeated navigation and footer markup so updates do not require copying HTML across pages.
-- [ ] Review `resources.html` for outdated links and references to old missing pages.
+- [x] Review `resources.html` for outdated links and references to old missing pages.
+  - Completed: Resources now uses 2026 greetings, FAQs, terms highlights, education links, order form, planting instructions, and Bear Lake links.
 - [ ] Decide whether `about.html` should remain as a fallback page or be archived.
 - [ ] Keep the limited palette in `styles.css` as the source of truth.
 - [ ] Confirm intentional page backgrounds for homepage, catalog, wishlist, and resources.

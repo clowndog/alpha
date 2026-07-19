@@ -16,6 +16,10 @@ Open `http://localhost:8891/`.
 - `catalog.html` - plant catalog loaded from local `data.json`
 - `wishlist.html` - saved plant inquiry list with EmailJS inquiry sending
 - `resources.html` - greetings, FAQs, legal information, and nursery resources
+- `education.html` - downloadable education and research documents
+- `order-form.html` - printable order form download
+- `planting-instructions.html` - printable planting instructions download
+- `bearlake.html` - Bear Lake project overview
 - `gis.html` - frozen GIS page retained for now
 
 ## Core Files

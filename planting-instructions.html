@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="navigation.js" defer></script>
+    <title>Planting Instructions</title>
+  </head>
+  <body>
+    <a href="index.html" class="logo-link" aria-label="Alpha Nurseries home">
+      <img src="assets/logo.png" alt="Company Logo" class="logomain" />
+    </a>
+    <nav id="mySidebar" class="sidebar">
+      <a href="index.html">Home</a>
+      <a href="catalog.html">Catalog</a>
+      <a href="#" id="arrow" onclick="expandResources();">
+        <span class="resources-text-arrow">
+          Resources
+          <i class="fas fa-chevron-down arrow"></i>
+        </span>
+      </a>
+      <div id="resources" style="display: none" class="resource-links">
+        <a href="resources.html#greetings" class="small-link">Greetings</a>
+        <a href="resources.html#faq" class="small-link">FAQs</a>
+        <a href="resources.html#legal" class="small-link">Legal</a>
+        <a href="order-form.html" class="small-link">Order Form</a>
+        <a href="education.html" class="small-link">Education</a>
+        <a href="gis.html" class="small-link">Plant Finder</a>
+      </div>
+      <a href="bearlake.html">Bear Lake</a>
+    </nav>
+    <button class="openbtn" onclick="openNav()">☰</button>
+    <main class="main page-content support-page">
+      <div class="headspacer"></div>
+      <header class="page-header">
+        <h1>Planting</h1>
+        <p>Printable instructions for planting and handling bare-root seedlings.</p>
+      </header>
+      <a class="resource-download" href="assets/plantinginstructions.pdf">Download planting instructions</a>
+    </main>
+  </body>
+</html>

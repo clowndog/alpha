@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="navigation.js" defer></script>
+    <title>Education</title>
+  </head>
+  <body>
+    <a href="index.html" class="logo-link" aria-label="Alpha Nurseries home">
+      <img src="assets/logo.png" alt="Company Logo" class="logomain" />
+    </a>
+    <nav id="mySidebar" class="sidebar">
+      <a href="index.html">Home</a>
+      <a href="catalog.html">Catalog</a>
+      <a href="#" id="arrow" onclick="expandResources();">
+        <span class="resources-text-arrow">
+          Resources
+          <i class="fas fa-chevron-down arrow"></i>
+        </span>
+      </a>
+      <div id="resources" style="display: none" class="resource-links">
+        <a href="resources.html#greetings" class="small-link">Greetings</a>
+        <a href="resources.html#faq" class="small-link">FAQs</a>
+        <a href="resources.html#legal" class="small-link">Legal</a>
+        <a href="order-form.html" class="small-link">Order Form</a>
+        <a href="education.html" class="small-link">Education</a>
+        <a href="gis.html" class="small-link">Plant Finder</a>
+      </div>
+      <a href="bearlake.html">Bear Lake</a>
+    </nav>
+    <button class="openbtn" onclick="openNav()">☰</button>
+    <main class="main page-content support-page">
+      <div class="headspacer"></div>
+      <header class="page-header">
+        <h1>Education</h1>
+        <p>Free planting, habitat, and stewardship documents.</p>
+      </header>
+      <section class="resource-card-list">
+        <a href="planting-instructions.html">Printable Planting Instructions</a>
+        <a href="assets/general_invasives_treatments_nwlpmi_shields_2022june18.pdf">Invasive Species Treatment Guide</a>
+        <a href="assets/tree_shrub_planting_handout_shields_2022july17.pdf">Tree & Shrub Planting Recommendations</a>
+        <a href="assets/tree_shrub_planting_handout_truncated_shields_2022july19.pdf">Bare-Root Tree & Shrub Care</a>
+        <a href="assets/wildflower_grass_planting_handout_shields_2022july17.pdf">Native Wildflower & Grass Recommendations</a>
+        <a href="assets/wildflower_grass_planting_handout_truncated_shields_2021july14.pdf">Native Wildflower & Grass Planting Guide</a>
+        <a href="assets/which_tree_should_i_plant.pdf">Which Tree Should I Plant?</a>
+        <a href="assets/deer_browse.pdf">Deer Browse Protection Basics</a>
+      </section>
+    </main>
+  </body>
+</html>

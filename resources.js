@@ -14,7 +14,7 @@ function scrollToSection(targetSection) {
 }
 
 function scrollToPreviousSection() {
-    const sections = [...document.querySelectorAll(".main > .headspacer")];
+    const sections = [...document.querySelectorAll(".resource-section")];
     const currentIndex = sections.findIndex(
         (section) => section.id === window.location.hash.slice(1)
     );
@@ -29,7 +29,7 @@ function scrollToPreviousSection() {
 }
 
 function scrollToNextSection() {
-    const sections = [...document.querySelectorAll(".main > .headspacer")];
+    const sections = [...document.querySelectorAll(".resource-section")];
     let currentIndex = sections.findIndex(
         (section) => section.id === window.location.hash.slice(1)
     );
