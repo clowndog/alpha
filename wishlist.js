@@ -88,6 +88,35 @@ const setRowPrices = (row, summary) => {
   row.dataset.fivehundredprice = prices.fivehundredprice;
 };
 
+const createWishlistEmptyRow = () => {
+  const emptyRow = document.createElement("tr");
+  const emptyCell = document.createElement("td");
+  const marquee = document.createElement("div");
+  const track = document.createElement("div");
+  const message =
+    "Go to the Catalog and click the heart icons to add species to your wishlist.";
+
+  emptyRow.classList.add("wishlist-empty-row");
+  emptyCell.colSpan = 6;
+  marquee.classList.add("wishlist-marquee");
+  marquee.setAttribute("aria-label", message);
+  track.classList.add("wishlist-marquee-track");
+
+  [message, message].forEach((text, index) => {
+    const span = document.createElement("span");
+    span.textContent = text;
+    if (index > 0) {
+      span.setAttribute("aria-hidden", "true");
+    }
+    track.appendChild(span);
+  });
+
+  marquee.appendChild(track);
+  emptyCell.appendChild(marquee);
+  emptyRow.appendChild(emptyCell);
+  return emptyRow;
+};
+
 const getCultivarLabel = (item) => {
   const latin = item.summaries.map((summary) => summary.latin).find(Boolean);
   return latin || "Common";
@@ -123,12 +152,13 @@ const formatTotal = (total) =>
 function updateGrandTotal() {
   const grandTotalElement = document.getElementById("grand-total");
   if (grandTotalElement) {
-    const tbody = document
-      .getElementById("wishlist-table")
-      .querySelector("tbody");
+    const table = document.getElementById("wishlist-table");
+    const tbody = table.querySelector("tbody");
     const rows = tbody.querySelectorAll("tr");
     const enabledRows = Array.from(rows).filter(
-      (row) => !row.classList.contains("disabled")
+      (row) =>
+        !row.classList.contains("disabled") &&
+        !row.classList.contains("wishlist-empty-row")
     );
     let grandTotal = 0;
     enabledRows.forEach((row) => {
@@ -148,6 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const createWishlistTable = () => {
   const wishlist = getWishlist();
+  const table = document.getElementById("wishlist-table");
   const tbody = document
     .getElementById("wishlist-table")
     .querySelector("tbody");
@@ -182,7 +213,19 @@ const createWishlistTable = () => {
     items[item.name] = newItem;
   });
 
-  Object.values(items).forEach((item) => {
+  const wishlistItems = Object.values(items);
+
+  if (wishlistItems.length === 0) {
+    table.classList.add("wishlist-empty");
+    table.classList.remove("wishlist-has-items");
+    tbody.appendChild(createWishlistEmptyRow());
+    return;
+  }
+
+  table.classList.add("wishlist-has-items");
+  table.classList.remove("wishlist-empty");
+
+  wishlistItems.forEach((item) => {
     const addWishlistRow = () => {
     const tr = document.createElement("tr");
     const tdName = document.createElement("td");
@@ -349,12 +392,6 @@ const createWishlistTable = () => {
 
     addWishlistRow();
   });
-
-  const emptyRow = document.createElement("tr");
-  const emptyCell = document.createElement("td");
-  emptyCell.colSpan = 6;
-  emptyRow.appendChild(emptyCell);
-  tbody.appendChild(emptyRow);
 };
 
 if (window.emailjs) {
@@ -421,7 +458,10 @@ document.getElementById("email-form").addEventListener("submit", (event) => {
     .querySelector("tbody");
   const rows = tbody.querySelectorAll("tr");
   rows.forEach((row, index) => {
-    if (!row.classList.contains("disabled") && index !== rows.length - 1) {
+    if (
+      !row.classList.contains("disabled") &&
+      !row.classList.contains("wishlist-empty-row")
+    ) {
       const name = row.querySelector("td:first-child").textContent;
       const cultivar = row.querySelector("td:nth-child(3) select").value;
       const size = row.querySelector("td:nth-child(4) select").value;

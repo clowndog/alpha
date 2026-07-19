@@ -10,9 +10,16 @@ html {
   --header-height: calc(var(--page-edge) + var(--page-edge) + var(--header-icon-size));
   --header-fade-height: calc(var(--header-height) + 32px);
   --catalog-stack-gap: 1.45rem;
-  --catalog-title-size: 3.5rem;
+  --font-body: Helvetica, Arial, sans-serif;
+  --type-caption-size: 0.72rem;
+  --type-small-size: 0.85rem;
   --type-body-size: 1rem;
-  --type-subhead-size: 1.05rem;
+  --type-lead-size: 1.05rem;
+  --type-nav-size: 1.25rem;
+  --type-section-title-size: 1.6rem;
+  --type-page-title-size: 3.5rem;
+  --type-line-body: 1.45;
+  --type-line-heading: 0.95;
   --wishlist-size: 50px;
   --wishlist-icon-size: 50px;
   --wishlist-clear-size: 20px;
@@ -48,7 +55,7 @@ html {
   margin: 0 auto;
   width: var(--page-width);
   max-width: var(--page-max-width);
-  font-family: Helvetica;
+  font-family: var(--font-body);
   font-size: var(--type-body-size);
   position: relative;
 }
@@ -59,7 +66,7 @@ html {
 }
 
 .page-content {
-  line-height: 1.45;
+  line-height: var(--type-line-body);
 }
 
 .page-header {
@@ -69,14 +76,14 @@ html {
 }
 
 .page-header h1 {
-  font-size: var(--catalog-title-size);
-  line-height: 0.95;
+  font-size: var(--type-page-title-size);
+  line-height: var(--type-line-heading);
   margin: 0 0 0.8rem;
 }
 
 .page-header p {
   max-width: calc(36rem + 1rem);
-  font-size: var(--type-subhead-size);
+  font-size: var(--type-lead-size);
   font-weight: 400;
   line-height: 1.3;
   margin: 0;
@@ -165,10 +172,16 @@ body:has(.catalog-page) {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: "Helvetica", Arial, sans-serif;
+  font-family: var(--font-body);
   color: white;
-  font-size: 2em;
+  font-size: var(--type-page-title-size);
   opacity: 0;
+}
+
+.animation h1 {
+  margin: 0;
+  font-size: inherit;
+  line-height: var(--type-line-heading);
 }
 
 #future-content-links {
@@ -214,9 +227,9 @@ body:has(.catalog-page) {
   text-align: center;
   position: relative;
   top: calc(100% + 20px);
-  font-family: "Helvetica", Arial, sans-serif;
+  font-family: var(--font-body);
   color: black;
-  font-size: 0.95rem;
+  font-size: var(--type-small-size);
   opacity: 0;
   transition: opacity 0.5s ease;
   margin: 0 auto;
@@ -229,7 +242,7 @@ body:has(.catalog-page) {
 }
 
 .quote-text {
-  font-size: 1rem;
+  font-size: var(--type-body-size);
   font-weight: 400;
   line-height: 1.5;
   margin: 0;
@@ -302,8 +315,8 @@ body:has(.catalog-page) {
   min-height: 34px;
   padding: 0.28rem var(--page-edge) 0.28rem calc(var(--page-edge) + 10px);
   text-decoration: none;
-  font-size: 1.25rem;
-  font-family: helvetica;
+  font-size: var(--type-nav-size);
+  font-family: var(--font-body);
   color: var(--page-gray);
   transition: 0.3s;
   white-space: nowrap;
@@ -475,7 +488,7 @@ body:has(.page-content):not(.wishlistbackground) .openbtn:not(.nav-open):hover {
 
 .wishlist-heart span {
   position: absolute;
-  font-size: 14px;
+  font-size: var(--type-small-size);
   color: var(--white);
   left: 50%;
   top: 50%;
@@ -525,7 +538,7 @@ body:has(.page-content):not(.wishlistbackground) .openbtn:not(.nav-open):hover {
   width: var(--page-width);
   max-width: var(--page-max-width);
   margin: 0 auto;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
 }
 
 .catalog-page .main,
@@ -549,8 +562,8 @@ body:has(.page-content):not(.wishlistbackground) .openbtn:not(.nav-open):hover {
   border-radius: 999px;
   color: var(--page-gray);
   cursor: pointer;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-family: var(--font-body);
+  font-size: var(--type-body-size);
   line-height: 1;
   overflow: hidden;
   padding: 0;
@@ -562,7 +575,7 @@ body:has(.page-content):not(.wishlistbackground) .openbtn:not(.nav-open):hover {
 
 .wishlist-button i {
   display: block;
-  font-size: 1rem;
+  font-size: var(--type-body-size);
   line-height: 1;
   color: inherit;
   pointer-events: none;
@@ -603,7 +616,7 @@ table td {
   margin: 0 auto;
   width: 100%;
   display: grid;
-  font-family: helvetica;
+  font-family: var(--font-body);
   color: var(--ink);
   grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   gap: 0.75rem;
@@ -627,25 +640,24 @@ table td {
 .card>.header {
   margin-bottom: 0.25rem;
   padding-right: 2.5rem;
-  font-size: 1.05rem;
+  font-size: var(--type-lead-size);
   font-weight: 600;
-  letter-spacing: -0.02em;
 }
 
 .card>.body {
-  font-size: 0.8rem;
+  font-size: var(--type-small-size);
   color: var(--page-gray);
 }
 
 .card>.summary {
-  font-size: 0.8rem;
+  font-size: var(--type-small-size);
   color: var(--ink);
   display: none;
 }
 
 .card.expanded>.summary {
   margin-top: 1rem;
-  font-size: 0.8rem;
+  font-size: var(--type-small-size);
   color: var(--ink);
   display: block;
 }
@@ -679,7 +691,7 @@ table td {
 
 .card th {
   color: var(--page-gray);
-  font-size: 0.72rem;
+  font-size: var(--type-caption-size);
   font-weight: 600;
 }
 
@@ -762,7 +774,7 @@ body.resource-mode {
   align-items: center;
   gap: 0;
   min-width: 0;
-  font-family: helvetica;
+  font-family: var(--font-body);
   margin: var(--catalog-stack-gap) 0;
   width: 100%;
   padding: 0.25rem;
@@ -779,7 +791,7 @@ body.resource-mode {
 }
 
 input {
-  font-size: 1rem;
+  font-size: var(--type-body-size);
   color: var(--white);
   padding: 0.5rem 0.5rem 0.5rem 1.2rem;
   background: none;
@@ -814,7 +826,7 @@ input::placeholder {
   -webkit-appearance: none;
   border-left: 0;
   border-radius: 0 999px 999px 0;
-  font-size: 1rem;
+  font-size: var(--type-body-size);
   font-weight: 500;
   background-image: none;
   cursor: pointer;
@@ -907,7 +919,7 @@ input::-webkit-search-cancel-button {
   min-width: 300px;
   min-height: 200px;
   display: grid;
-  font-family: helvetica;
+  font-family: var(--font-body);
   color: white;
   grid-template-columns: repeat(auto-fill, minmax(auto-fill, 1fr));
   gap: 0.4rem;
@@ -924,7 +936,7 @@ input::-webkit-search-cancel-button {
 #email-form input,
 #email-form textarea {
   font-family: inherit;
-  font-size: 1rem;
+  font-size: var(--type-body-size);
   color: var(--black);
   padding: 0.65rem 0.9rem;
   background: none;
@@ -977,12 +989,12 @@ input::-webkit-search-cancel-button {
 
 .email-status h2 {
   margin: 0 0 0.25rem;
-  font-size: 1.2rem;
+  font-size: var(--type-lead-size);
 }
 
 .email-status p {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: var(--type-small-size);
 }
 
 .email-status-icon {
@@ -1078,6 +1090,55 @@ textarea:focus {
   background-color: var(--page-gray);
 }
 
+.wishlist-marquee {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0.65rem 5px;
+  color: var(--white);
+  font-size: var(--type-small-size);
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.wishlist-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: wishlist-marquee 18s linear infinite;
+}
+
+.wishlist-marquee-track span {
+  display: inline-block;
+  padding-right: 4rem;
+}
+
+@keyframes wishlist-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+table#wishlist-table .wishlist-empty-row td {
+  width: 100%;
+  max-width: 0;
+  padding: 0;
+  text-align: left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wishlist-marquee-track {
+    animation: none;
+  }
+}
+
 table#wishlist-table td:nth-child(5) input[type="number"] {
   margin: 0;
   padding: 0.4rem 0.5rem;
@@ -1109,7 +1170,7 @@ table#wishlist-table td:first-child {
 }
 
 table#wishlist-table td {
-  font-size: 0.85rem;
+  font-size: var(--type-small-size);
   color: var(--black);
   text-align: center;
   width: 10%;
@@ -1292,12 +1353,12 @@ table#wishlist-table .td-total {
 .resource-section h2,
 .story-section h2 {
   margin: 0 0 1rem;
-  font-size: 1.6rem;
+  font-size: var(--type-section-title-size);
 }
 
 .resource-section h3 {
   margin: 1.5rem 0 0.35rem;
-  font-size: 1rem;
+  font-size: var(--type-body-size);
 }
 
 .resource-date {
@@ -1335,7 +1396,7 @@ table#wishlist-table .td-total {
 
 .bearlake-archive h4 {
   margin: 3rem 0 1rem;
-  font-size: 1.2rem;
+  font-size: var(--type-lead-size);
   line-height: 1.3;
 }
 
@@ -1427,7 +1488,7 @@ input:checked+.slider:before {
   padding: 1.6rem max(10%, var(--page-edge)) 1rem;
   color: var(--footer-text);
   background-color: var(--black);
-  font-family: helvetica;
+  font-family: var(--font-body);
   border-top: 0;
 }
 
@@ -1435,14 +1496,14 @@ input:checked+.slider:before {
   margin-top: 0;
   margin-bottom: 0.55rem;
   font-weight: bold;
-  font-size: 16px;
+  font-size: var(--type-body-size);
 }
 
 .footer ul {
   padding: 0;
   list-style: none;
   line-height: 1.45;
-  font-size: 14px;
+  font-size: var(--type-small-size);
   margin-bottom: 0;
 }
 
@@ -1495,7 +1556,7 @@ input:checked+.slider:before {
 .footer .item.text p {
   opacity: 0.68;
   margin-bottom: 0;
-  font-size: 14px;
+  font-size: var(--type-small-size);
   line-height: 1.4;
 }
 
@@ -1509,7 +1570,7 @@ input:checked+.slider:before {
 .footer .copyright {
   text-align: center;
   opacity: 0.3;
-  font-size: 13px;
+  font-size: var(--type-caption-size);
   margin-bottom: 0;
 }
 
@@ -1706,7 +1767,7 @@ input:checked+.slider:before {
 
 #gis-controls select,
 #gis-controls button {
-  font-size: 1rem;
+  font-size: var(--type-body-size);
   padding: 0.5rem;
   border-radius: 1rem;
   border: 2px solid var(--black);
@@ -1749,7 +1810,7 @@ input:checked+.slider:before {
   margin-top: 1rem; /* Spacing above the legend */
   margin-bottom: 2rem; /* Consistent spacing below */
   display: none; /* Hidden by default */
-  font-size: 0.9em;
+  font-size: var(--type-small-size);
 }
 
 .heatmap-legend h4 {

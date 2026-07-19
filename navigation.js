@@ -25,20 +25,23 @@ window.closeNav = (event) => {
   openButton.classList.remove("nav-open");
 };
 
-window.expandResources = () => {
-  const resourcesDiv = document.getElementById("resources");
-  const resourcesArrow = document.querySelector(".arrow");
-  if (!resourcesDiv || !resourcesArrow) return;
+window.toggleNavGroup = (groupId, arrowId) => {
+  const navGroup = document.getElementById(groupId);
+  const navArrow = document.getElementById(arrowId);
+  if (!navGroup || !navArrow) return;
 
-  resourcesDiv.style.display =
-    resourcesDiv.style.display === "none" ? "block" : "none";
-  resourcesArrow.classList.toggle("expanded");
+  navGroup.classList.toggle("expanded");
+  navArrow.classList.toggle("expanded");
+};
+
+window.expandResources = () => {
+  window.toggleNavGroup("resources", "resources-arrow");
 };
 
 document.addEventListener("DOMContentLoaded", () => {
   const openButton = document.querySelector(".openbtn");
   const closeButton = document.querySelector(".closebtn");
-  const resourcesButton = document.getElementById("arrow");
+  const navToggles = document.querySelectorAll(".nav-toggle");
 
   if (openButton) {
     openButton.removeAttribute("onclick");
@@ -50,11 +53,11 @@ document.addEventListener("DOMContentLoaded", () => {
     closeButton.addEventListener("click", window.closeNav);
   }
 
-  if (resourcesButton) {
-    resourcesButton.removeAttribute("onclick");
-    resourcesButton.addEventListener("click", (event) => {
+  navToggles.forEach((navToggle) => {
+    navToggle.removeAttribute("onclick");
+    navToggle.addEventListener("click", (event) => {
       event.preventDefault();
-      window.expandResources();
+      window.toggleNavGroup(navToggle.dataset.target, navToggle.dataset.arrow);
     });
-  }
+  });
 });

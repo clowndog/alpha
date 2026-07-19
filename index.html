@@ -1,9 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alpha Nurseries | Wholesale Bare-Root Trees &amp; Shrubs in Holland, MI</title>
+    <meta name="description" content="Alpha Nurseries is a wholesale seedling nursery in Holland, Michigan growing bare-root native plants, conifers, broadleaves, trees, and shrubs for restoration, Christmas tree, ornamental, nonprofit, and commercial markets." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.alphanurseries.com/" />
+    <meta property="og:title" content="Alpha Nurseries | Wholesale Bare-Root Trees &amp; Shrubs in Holland, MI" />
+    <meta property="og:description" content="Alpha Nurseries is a wholesale seedling nursery in Holland, Michigan growing bare-root native plants, conifers, broadleaves, trees, and shrubs for restoration, Christmas tree, ornamental, nonprofit, and commercial markets." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.alphanurseries.com/" />
+    <meta property="og:image" content="https://www.alphanurseries.com/assets/logo.png" />
+    <meta property="og:site_name" content="Alpha Nurseries" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Alpha Nurseries | Wholesale Bare-Root Trees &amp; Shrubs in Holland, MI" />
+    <meta name="twitter:description" content="Alpha Nurseries is a wholesale seedling nursery in Holland, Michigan growing bare-root native plants, conifers, broadleaves, trees, and shrubs for restoration, Christmas tree, ornamental, nonprofit, and commercial markets." />
+    <script type="application/ld+json">
+{
+      "@context": "https://schema.org",
+      "@graph": [
+            {
+                  "@type": [
+                        "LocalBusiness",
+                        "GardenStore"
+                  ],
+                  "@id": "https://www.alphanurseries.com/#organization",
+                  "name": "Alpha Nurseries, Inc.",
+                  "url": "https://www.alphanurseries.com/",
+                  "logo": "https://www.alphanurseries.com/assets/logo.png",
+                  "image": "https://www.alphanurseries.com/assets/logo.png",
+                  "telephone": "+1-269-857-7804",
+                  "faxNumber": "+1-269-857-8162",
+                  "email": "info@alphanurseries.com",
+                  "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "3737 65th Street",
+                        "addressLocality": "Holland",
+                        "addressRegion": "MI",
+                        "postalCode": "49423",
+                        "addressCountry": "US"
+                  },
+                  "description": "Wholesale bare-root seedling nursery growing trees and shrubs for restoration, habitat improvement, Christmas tree, ornamental, nonprofit, and commercial plant markets.",
+                  "areaServed": "United States"
+            },
+            {
+                  "@type": "WebSite",
+                  "@id": "https://www.alphanurseries.com/#website",
+                  "url": "https://www.alphanurseries.com/",
+                  "name": "Alpha Nurseries",
+                  "publisher": {
+                        "@id": "https://www.alphanurseries.com/#organization"
+                  },
+                  "inLanguage": "en-US"
+            },
+            {
+                  "@type": "WebPage",
+                  "@id": "https://www.alphanurseries.com/#webpage",
+                  "url": "https://www.alphanurseries.com/",
+                  "name": "Alpha Nurseries | Wholesale Bare-Root Trees & Shrubs in Holland, MI",
+                  "description": "Alpha Nurseries is a wholesale seedling nursery in Holland, Michigan growing bare-root native plants, conifers, broadleaves, trees, and shrubs for restoration, Christmas tree, ornamental, nonprofit, and commercial markets.",
+                  "isPartOf": {
+                        "@id": "https://www.alphanurseries.com/#website"
+                  },
+                  "about": {
+                        "@id": "https://www.alphanurseries.com/#organization"
+                  },
+                  "publisher": {
+                        "@id": "https://www.alphanurseries.com/#organization"
+                  },
+                  "inLanguage": "en-US"
+            }
+      ]
+}
+    </script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -11,12 +82,11 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="navigation.js" defer></script>
     <script src="animation.js" defer></script>
-    <title>Catalog</title>
   </head>
   <body>
     <header>
       <a href="index.html" class="logo-link" aria-label="Alpha Nurseries home">
-        <img src="assets/logo.png" alt="Company Logo" class="logomain" />
+        <img src="assets/logo.png" alt="Alpha Nurseries logo" class="logomain" />
       </a>
     </header>
     <main class="main-content">
@@ -26,31 +96,37 @@
         </video>
       </div>
       <nav id="mySidebar" class="sidebar">
-        <a href="index.html">Home</a>
-        <a href="catalog.html">Catalog</a>
-        <a
-          href="#"
-          id="arrow"
-          onclick="expandResources();"
-        >
-          <span class="resources-text-arrow">
-            Resources
-            <i class="fas fa-chevron-down arrow"></i>
-          </span>
-        </a>
-        <div id="resources" style="display: none" class="resource-links">
-          <a href="resources.html#greetings" class="small-link">Greetings</a>
-          <a href="resources.html#faq" class="small-link">FAQs</a>
-          <a href="resources.html#legal" class="small-link">Legal</a>
-          <a href="education.html" class="small-link">Education</a>
-          <a href="order-form.html" class="small-link">Order Form</a>
-          <a href="gis.html" class="small-link">Plant Finder</a>
-        </div>
-        <a href="bearlake.html">Bear Lake</a>
-      </nav>
+      <a href="index.html">Home</a>
+      <a href="#" class="nav-toggle" data-target="ordering" data-arrow="ordering-arrow">
+        <span class="resources-text-arrow">
+          Ordering
+          <i class="fas fa-chevron-down arrow" id="ordering-arrow"></i>
+        </span>
+      </a>
+      <div id="ordering" class="resource-links">
+        <a href="catalog.html" class="small-link">Catalog</a>
+        <a href="wishlist.html" class="small-link">Wishlist</a>
+        <a href="order-form.html" class="small-link">Order Form</a>
+      </div>
+      <a href="#" class="nav-toggle" data-target="resources" data-arrow="resources-arrow">
+        <span class="resources-text-arrow">
+          Resources
+          <i class="fas fa-chevron-down arrow" id="resources-arrow"></i>
+        </span>
+      </a>
+      <div id="resources" class="resource-links">
+        <a href="resources.html#greetings" class="small-link">Greetings</a>
+        <a href="resources.html#faq" class="small-link">FAQs</a>
+        <a href="resources.html#legal" class="small-link">Legal</a>
+        <a href="education.html" class="small-link">Education</a>
+        <a href="planting-instructions.html" class="small-link">Planting Instructions</a>
+      </div>
+      <a href="gis.html">Plant Finder</a>
+      <a href="bearlake.html">Bear Lake</a>
+    </nav>
       <button class="openbtn" onclick="openNav()">☰</button>
       <section class="animation" id="animation">
-        <h1>Welcome to Alpha.</h1>
+        <h1>Alpha Nurseries</h1>
       </section>
       <div class="spacer"></div>
       <section class="quote">
@@ -65,7 +141,7 @@
             ><div class="circle"></div
           ></a>
         </div>
-        <h2 class="quote-text">
+        <p class="quote-text">
           Alpha Nurseries, Inc is a wholesale seedling nursery located in
           Holland, MI. We grow both conifers and broadleaves; in trees and
           shrubs. We specialize in growing bare-root woody plants to supply
@@ -74,12 +150,20 @@
           and commercial plant distributor markets. We grow several million
           plants a year across a selection of 250 species. Shipping season
           begins in late September and continues through the following June.
-        </h2>
+        </p>
       </section>
     </main>
     <footer class="footer">
       <div class="container">
         <div class="row">
+          <div class="item">
+            <h3>Ordering</h3>
+            <ul>
+              <li><a href="catalog.html">Catalog</a></li>
+              <li><a href="wishlist.html">Wishlist</a></li>
+              <li><a href="order-form.html">Order Form</a></li>
+            </ul>
+          </div>
           <div class="item">
             <h3>Resources</h3>
             <ul>
@@ -87,15 +171,14 @@
               <li><a href="resources.html#faq">FAQs</a></li>
               <li><a href="resources.html#legal">Legal</a></li>
               <li><a href="education.html">Education</a></li>
-              <li><a href="order-form.html">Order Form</a></li>
-              <li><a href="gis.html">Plant Finder</a></li>
+              <li><a href="planting-instructions.html">Planting Instructions</a></li>
             </ul>
           </div>
           <div class="item">
-            <h3>Catalog</h3>
+            <h3>Projects</h3>
             <ul>
-              <li><a href="catalog.html">Plant Catalog</a></li>
-              <li><a href="wishlist.html">Wishlist</a></li>
+              <li><a href="gis.html">Plant Finder</a></li>
+              <li><a href="bearlake.html">Bear Lake</a></li>
             </ul>
           </div>
           <div class="item text">
@@ -108,7 +191,7 @@
         </div>
         <div class="row">
           <div class="item logofooter">
-            <img src="assets/logo.png" alt="Company Logo" />
+            <img src="assets/logo.png" alt="Alpha Nurseries logo" />
           </div>
         </div>
         <div class="row">
