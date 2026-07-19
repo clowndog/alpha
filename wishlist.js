@@ -42,26 +42,78 @@ const getWishlist = () => {
   return wishlist ? JSON.parse(wishlist) : [];
 };
 
-const parsePrice = (price) => parseFloat(String(price).replace("$", "")) || 0;
+const parsePrice = (price) => {
+  const parsedPrice = parseFloat(String(price).replace("$", ""));
+  return Number.isFinite(parsedPrice) ? parsedPrice : 0;
+};
 
 const formatMoney = (amount) => `$${amount.toFixed(2)}`;
+const unavailablePriceText = "Contact for pricing";
+
+const priceKeys = {
+  1: "oneprice",
+  25: "twentyfiveprice",
+  100: "onehundredprice",
+  500: "fivehundredprice",
+};
+
+const getSummaryPrice = (summary, tier) => {
+  if (!summary) {
+    return "-";
+  }
+
+  const nestedPrice = summary.price && summary.price[tier];
+  if (Number.isFinite(parseFloat(nestedPrice))) {
+    return nestedPrice;
+  }
+
+  const priceKey = priceKeys[tier];
+  const legacyPrice =
+    summary[priceKey] || (summary.prices && summary.prices[priceKey]);
+  return Number.isFinite(parseFloat(legacyPrice)) ? legacyPrice : "-";
+};
+
+const getSummaryPrices = (summary) => ({
+  oneprice: getSummaryPrice(summary, 1),
+  twentyfiveprice: getSummaryPrice(summary, 25),
+  onehundredprice: getSummaryPrice(summary, 100),
+  fivehundredprice: getSummaryPrice(summary, 500),
+});
+
+const setRowPrices = (row, summary) => {
+  const prices = getSummaryPrices(summary);
+  row.dataset.oneprice = prices.oneprice;
+  row.dataset.twentyfiveprice = prices.twentyfiveprice;
+  row.dataset.onehundredprice = prices.onehundredprice;
+  row.dataset.fivehundredprice = prices.fivehundredprice;
+};
+
+const getTierPrice = (quantity, prices) => {
+  if (quantity >= 500) {
+    return prices.fivehundredprice;
+  } else if (quantity >= 100) {
+    return prices.onehundredprice;
+  } else if (quantity >= 25) {
+    return prices.twentyfiveprice;
+  }
+
+  return prices.oneprice;
+};
 
 function calculateTotal(quantity, prices) {
-  const oneprice = parsePrice(prices.oneprice);
-  const twentyfiveprice = parsePrice(prices.twentyfiveprice);
-  const onehundredprice = parsePrice(prices.onehundredprice);
-  const fivehundredprice = parsePrice(prices.fivehundredprice);
+  const safeQuantity = Number.isFinite(quantity) ? quantity : 0;
+  const tierPrice = getTierPrice(safeQuantity, prices);
+  const parsedTierPrice = parseFloat(String(tierPrice).replace("$", ""));
 
-  if (quantity >= 500) {
-    return quantity * fivehundredprice;
-  } else if (quantity >= 100) {
-    return quantity * onehundredprice;
-  } else if (quantity >= 25) {
-    return quantity * twentyfiveprice;
-  } else {
-    return quantity * oneprice;
+  if (!Number.isFinite(parsedTierPrice)) {
+    return null;
   }
+
+  return safeQuantity * parsedTierPrice;
 }
+
+const formatTotal = (total) =>
+  Number.isFinite(total) ? formatMoney(total) : unavailablePriceText;
 
 function updateGrandTotal() {
   const grandTotalElement = document.getElementById("grand-total");
@@ -98,23 +150,28 @@ const createWishlistTable = () => {
   const items = {};
 
   wishlist.forEach((item) => {
+    const summaries = Array.isArray(item.summaries) ? item.summaries : [];
+    if (!item.name || summaries.length === 0) {
+      return;
+    }
+
     const existingItem = items[item.name];
     if (existingItem) {
-      existingItem.sizes.push(item.sizes[0]);
+      summaries.forEach((summary) => {
+        existingItem.summaries.push(summary);
+        if (summary.size) {
+          existingItem.sizes.push(summary.size);
+        }
+      });
       return;
     }
 
     const newItem = {
       name: item.name,
-      age: item.summaries[0].age,
-      summaries: item.summaries,
-      prices: {
-        fivehundredprice: item.summaries[0].fivehundredprice || "-",
-        onehundredprice: item.summaries[0].onehundredprice || "-",
-        twentyfiveprice: item.summaries[0].twentyfiveprice || "-",
-        oneprice: item.summaries[0].oneprice || "-",
-      },
-      sizes: item.summaries.map((summary) => summary.size),
+      age: summaries[0].age,
+      summaries,
+      prices: getSummaryPrices(summaries[0]),
+      sizes: summaries.map((summary) => summary.size),
     };
 
     items[item.name] = newItem;
@@ -130,10 +187,7 @@ const createWishlistTable = () => {
 
     const tdXButton = document.createElement("td");
 
-    tr.dataset.oneprice = item.prices.oneprice;
-    tr.dataset.twentyfiveprice = item.prices.twentyfiveprice;
-    tr.dataset.onehundredprice = item.prices.onehundredprice;
-    tr.dataset.fivehundredprice = item.prices.fivehundredprice;
+    setRowPrices(tr, item.summaries[0]);
 
     const sizeSelector = document.createElement("select");
     item.sizes.forEach((size) => {
@@ -166,17 +220,14 @@ const createWishlistTable = () => {
       const selectedSize = item.summaries.find(
         (summary) => summary.size === size
       );
-      tr.dataset.oneprice = selectedSize.price[1] || "-";
-      tr.dataset.twentyfiveprice = selectedSize.price[25] || "-";
-      tr.dataset.onehundredprice = selectedSize.price[100] || "-";
-      tr.dataset.fivehundredprice = selectedSize.price[500] || "-";
+      setRowPrices(tr, selectedSize);
       const total = calculateTotal(quantity, {
         oneprice: tr.dataset.oneprice,
         twentyfiveprice: tr.dataset.twentyfiveprice,
         onehundredprice: tr.dataset.onehundredprice,
         fivehundredprice: tr.dataset.fivehundredprice,
       });
-      tdTotal.textContent = formatMoney(total);
+      tdTotal.textContent = formatTotal(total);
       updateGrandTotal();
     });
 
@@ -186,10 +237,7 @@ const createWishlistTable = () => {
       const selectedSize = item.summaries.find(
         (summary) => summary.size === size
       );
-      tr.dataset.oneprice = selectedSize.price[1] || "-";
-      tr.dataset.twentyfiveprice = selectedSize.price[25] || "-";
-      tr.dataset.onehundredprice = selectedSize.price[100] || "-";
-      tr.dataset.fivehundredprice = selectedSize.price[500] || "-";
+      setRowPrices(tr, selectedSize);
       const total = calculateTotal(quantity, {
         oneprice: tr.dataset.oneprice,
         twentyfiveprice: tr.dataset.twentyfiveprice,
@@ -197,7 +245,7 @@ const createWishlistTable = () => {
         fivehundredprice: tr.dataset.fivehundredprice,
       });
 
-      tdTotal.textContent = formatMoney(total);
+      tdTotal.textContent = formatTotal(total);
       updateGrandTotal();
     });
 
@@ -215,7 +263,7 @@ const createWishlistTable = () => {
       onehundredprice: tr.dataset.onehundredprice,
       fivehundredprice: tr.dataset.fivehundredprice,
     });
-    tdTotal.textContent = formatMoney(initialTotal);
+    tdTotal.textContent = formatTotal(initialTotal);
 
     const xButton = document.createElement("button");
     xButton.textContent = "x";
@@ -300,21 +348,26 @@ document.getElementById("email-form").addEventListener("submit", (event) => {
   const message = document.getElementById("message").value;
 
   const items = getWishlist().reduce((acc, item) => {
+    const summaries = Array.isArray(item.summaries) ? item.summaries : [];
+    if (!item.name || summaries.length === 0) {
+      return acc;
+    }
+
     if (!acc[item.name]) {
       acc[item.name] = {
         name: item.name,
-        age: item.summaries[0].age,
-        summaries: item.summaries,
-        sizes: item.summaries.map((summary) => summary.size),
-        prices: {
-          oneprice: item.summaries[0].oneprice || "-",
-          twentyfiveprice: item.summaries[0].twentyfiveprice || "-",
-          onehundredprice: item.summaries[0].onehundredprice || "-",
-          fivehundredprice: item.summaries[0].fivehundredprice || "-",
-        },
+        age: summaries[0].age,
+        summaries,
+        sizes: summaries.map((summary) => summary.size),
+        prices: getSummaryPrices(summaries[0]),
       };
     } else {
-      acc[item.name].sizes.push(item.sizes[0]);
+      summaries.forEach((summary) => {
+        acc[item.name].summaries.push(summary);
+        if (summary.size) {
+          acc[item.name].sizes.push(summary.size);
+        }
+      });
     }
     return acc;
   }, {});
