@@ -51,6 +51,10 @@ The site is being streamlined around a small palette:
 
 Keep new styling aligned to the shared variables in `styles.css`. Avoid introducing extra accent colors.
 
+## Roadmap
+
+Planned improvements and cleanup ideas live in `ROADMAP.md`.
+
 ## Archive
 
 Archived files live under `archive/`.
