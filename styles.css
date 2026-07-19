@@ -1092,11 +1092,11 @@ textarea:focus {
 
 .wishlist-marquee {
   display: block;
-  width: 100%;
+  width: calc(100% - 10px);
   max-width: 100%;
   overflow: hidden;
-  margin: 0;
-  padding: 0.65rem 5px;
+  margin: 0 5px;
+  padding: 0.65rem 0;
   color: var(--white);
   font-size: var(--type-small-size);
   font-weight: 700;
