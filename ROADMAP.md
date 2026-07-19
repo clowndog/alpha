@@ -39,7 +39,7 @@ The goal is to improve the current static HTML/CSS/JavaScript site carefully, on
   - The catalog saves wishlist prices in a nested structure like `summary.price[1]`, `summary.price[25]`, `summary.price[100]`, and `summary.price[500]`.
   - Some wishlist logic still appears to read older fields like `summary.oneprice`, `summary.twentyfiveprice`, `summary.onehundredprice`, and `summary.fivehundredprice`.
   - Correct this without changing the saved wishlist structure again unless there is no safer option.
-  - Completed: `wishlist.js` now reads the nested `summary.price` tiers first, falls back to older summary price fields where possible, and displays `Contact for pricing` when the required tier is unavailable.
+  - Completed: `wishlist.js` now reads the nested `summary.price` tiers first, falls back to older summary price fields where possible, and displays `Contact Us` when the required tier is unavailable.
 - [ ] Add catalog loading and error states.
   - Show a clear loading message while `data.json` is being fetched.
   - Check `response.ok` before trying to parse catalog data.
@@ -133,6 +133,7 @@ The goal is to improve the current static HTML/CSS/JavaScript site carefully, on
 - [ ] Preview catalog changes before replacing `data.json`.
 - [ ] Generate an import report after reading an Excel price list.
 - [ ] Add product availability fields.
+- [ ] Add real cultivar data/options when the catalog has a dependable cultivar field.
 - [ ] Add catalog descriptions and photos.
 - [ ] Add better search and category filtering.
 - [ ] Export or print wishlist inquiries.
@@ -150,7 +151,8 @@ The goal is to improve the current static HTML/CSS/JavaScript site carefully, on
 - [ ] Decide whether `about.html` should remain as a fallback page or be archived.
 - [ ] Keep the limited palette in `styles.css` as the source of truth.
 - [ ] Confirm intentional page backgrounds for homepage, catalog, wishlist, and resources.
-- [ ] Make the fixed header fade match each page background.
+- [x] Make the fixed header fade match each page background.
+  - Completed: the header fade uses a CSS color variable, with catalog mapped to cream and wishlist mapped to gray.
 - [ ] Tighten type styles around a small set of roles: display title, subheading, body, card title, and small/meta text.
 - [ ] Review icon sizing and corner spacing across nav, logo, wishlist, and resource arrows.
 - [ ] Revisit the homepage circle design separately.
@@ -164,6 +166,7 @@ The goal is to improve the current static HTML/CSS/JavaScript site carefully, on
 - [ ] Create a compressed deploy package that excludes `.git/`, `archive/local-backups/`, and `scripts/__pycache__/`.
 - [ ] Document exactly which files hosting staff should replace when a new catalog is generated.
 - [ ] Redesign the wishlist page so the form, saved items, background, and header fade feel intentional together.
+  - Partial: wishlist form fields, table controls, row actions, duplicate rows, a placeholder cultivar selector, and missing-price text have been tightened.
 - [ ] Improve resource-page section navigation so anchor jumps feel smoother and account for the fixed header.
 - [ ] Review success and error messaging for EmailJS on Chrome, Safari, and mobile.
 - [ ] Review image and video sizes for production loading performance.

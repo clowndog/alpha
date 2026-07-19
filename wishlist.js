@@ -48,7 +48,7 @@ const parsePrice = (price) => {
 };
 
 const formatMoney = (amount) => `$${amount.toFixed(2)}`;
-const unavailablePriceText = "Contact for pricing";
+const unavailablePriceText = "Contact Us";
 
 const priceKeys = {
   1: "oneprice",
@@ -86,6 +86,11 @@ const setRowPrices = (row, summary) => {
   row.dataset.twentyfiveprice = prices.twentyfiveprice;
   row.dataset.onehundredprice = prices.onehundredprice;
   row.dataset.fivehundredprice = prices.fivehundredprice;
+};
+
+const getCultivarLabel = (item) => {
+  const latin = item.summaries.map((summary) => summary.latin).find(Boolean);
+  return latin || "Common";
 };
 
 const getTierPrice = (quantity, prices) => {
@@ -178,8 +183,10 @@ const createWishlistTable = () => {
   });
 
   Object.values(items).forEach((item) => {
+    const addWishlistRow = () => {
     const tr = document.createElement("tr");
     const tdName = document.createElement("td");
+    const tdCultivar = document.createElement("td");
     const tdSize = document.createElement("td");
     const tdQuantity = document.createElement("td");
     const tdTotal = document.createElement("td");
@@ -195,6 +202,11 @@ const createWishlistTable = () => {
       option.textContent = size;
       sizeSelector.appendChild(option);
     });
+
+    const cultivarSelector = document.createElement("select");
+    const cultivarOption = document.createElement("option");
+    cultivarOption.textContent = getCultivarLabel(item);
+    cultivarSelector.appendChild(cultivarOption);
 
     const quantityInput = document.createElement("input");
     quantityInput.type = "number";
@@ -265,12 +277,25 @@ const createWishlistTable = () => {
     });
     tdTotal.textContent = formatTotal(initialTotal);
 
+    const duplicateButton = document.createElement("button");
+    duplicateButton.type = "button";
+    duplicateButton.textContent = "+";
+    duplicateButton.setAttribute("aria-label", `Duplicate ${item.name} row`);
+    duplicateButton.classList.add("wishlist-row-action", "wishlist-duplicate-row");
+    tdXButton.appendChild(duplicateButton);
+
     const xButton = document.createElement("button");
-    xButton.textContent = "x";
+    xButton.type = "button";
+    xButton.textContent = "×";
+    xButton.setAttribute("aria-label", `Remove ${item.name} from total`);
+    xButton.classList.add("wishlist-row-action", "wishlist-remove-row");
     tdXButton.appendChild(xButton);
 
     const undoButton = document.createElement("button");
-    undoButton.textContent = "⟲";
+    undoButton.type = "button";
+    undoButton.textContent = "↩";
+    undoButton.setAttribute("aria-label", `Restore ${item.name} to total`);
+    undoButton.classList.add("wishlist-row-action", "wishlist-restore-row");
     undoButton.style.display = "none";
     undoButton.style.opacity = "1";
     tdXButton.appendChild(undoButton);
@@ -303,20 +328,31 @@ const createWishlistTable = () => {
       updateGrandTotal();
     });
 
+    duplicateButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      addWishlistRow();
+      updateGrandTotal();
+    });
+
     tdName.textContent = item.name;
+    tdCultivar.appendChild(cultivarSelector);
     tdSize.appendChild(sizeSelector);
     tdQuantity.appendChild(quantityInput);
     tr.appendChild(tdName);
-    tr.appendChild(tdQuantity);
-    tr.appendChild(tdSize);
-    tr.appendChild(tdTotal);
     tr.appendChild(tdXButton);
+    tr.appendChild(tdCultivar);
+    tr.appendChild(tdSize);
+    tr.appendChild(tdQuantity);
+    tr.appendChild(tdTotal);
     tbody.appendChild(tr);
+    };
+
+    addWishlistRow();
   });
 
   const emptyRow = document.createElement("tr");
   const emptyCell = document.createElement("td");
-  emptyCell.colSpan = 5;
+  emptyCell.colSpan = 6;
   emptyRow.appendChild(emptyCell);
   tbody.appendChild(emptyRow);
 };
@@ -387,11 +423,12 @@ document.getElementById("email-form").addEventListener("submit", (event) => {
   rows.forEach((row, index) => {
     if (!row.classList.contains("disabled") && index !== rows.length - 1) {
       const name = row.querySelector("td:first-child").textContent;
-      const quantity = row.querySelector("td:nth-child(2) input").value;
-      const size = row.querySelector("td:nth-child(3) select").value;
+      const cultivar = row.querySelector("td:nth-child(3) select").value;
+      const size = row.querySelector("td:nth-child(4) select").value;
+      const quantity = row.querySelector("td:nth-child(5) input").value;
       const total = row.querySelector(".td-total").textContent;
 
-      formattedTable += `${name}: ${quantity} // ${size} // ${total}\n`;
+      formattedTable += `${name}: ${cultivar} // ${quantity} // ${size} // ${total}\n`;
     }
   });
 

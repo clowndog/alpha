@@ -25,7 +25,11 @@ html {
   --nav-muted: #818181;
   --line: rgba(17, 17, 17, 0.14);
   --page-cream: #f4f1ea;
+  --page-cream-rgb: 244, 241, 234;
   --page-gray: #a6a6a6;
+  --page-gray-rgb: 166, 166, 166;
+  --page-white-rgb: 255, 255, 255;
+  --header-fade-rgb: var(--page-white-rgb);
   --footer-text: #f0f9ff;
   overscroll-behavior: none;
   min-height: 100vh;
@@ -91,9 +95,9 @@ body::before {
   pointer-events: none;
   background: linear-gradient(
     to bottom,
-    rgba(244, 241, 234, 0.96) 0%,
-    rgba(244, 241, 234, 0.9) 58%,
-    rgba(244, 241, 234, 0) 100%
+    rgba(var(--header-fade-rgb), 0.96) 0%,
+    rgba(var(--header-fade-rgb), 0.9) 58%,
+    rgba(var(--header-fade-rgb), 0) 100%
   );
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
@@ -113,6 +117,10 @@ body::before {
 
 body:has(#video-container)::before {
   display: none;
+}
+
+body:has(.catalog-page) {
+  --header-fade-rgb: var(--page-cream-rgb);
 }
 
 .main-content {
@@ -914,9 +922,10 @@ input::-webkit-search-cancel-button {
 
 #email-form input,
 #email-form textarea {
+  font-family: inherit;
   font-size: 1rem;
   color: var(--black);
-  padding: 0.5rem;
+  padding: 0.65rem 0.9rem;
   background: none;
   border: 2px solid var(--black);
   border-radius: 1rem;
@@ -926,7 +935,9 @@ input::-webkit-search-cancel-button {
 
 #email-form input::placeholder,
 #email-form textarea::placeholder {
+  font-family: inherit;
   color: var(--white);
+  opacity: 1;
 }
 
 #email-form input[type="submit"] {
@@ -1062,39 +1073,42 @@ textarea:focus {
 /* #region wishlist */
 
 .wishlistbackground {
+  --header-fade-rgb: var(--page-gray-rgb);
   background-color: var(--page-gray);
 }
 
-table#wishlist-table td:nth-child(2) input[type="number"] {
+table#wishlist-table td:nth-child(5) input[type="number"] {
   margin: 0;
   padding: 0.4rem 0.5rem;
   text-align: center;
   overflow: hidden;
 }
 
-table#wishlist-table td:nth-child(2) input[type="number"]::-webkit-inner-spin-button,
-table#wishlist-table td:nth-child(2) input[type="number"]::-webkit-outer-spin-button {
+table#wishlist-table td:nth-child(5) input[type="number"]::-webkit-inner-spin-button,
+table#wishlist-table td:nth-child(5) input[type="number"]::-webkit-outer-spin-button {
   appearance: none;
   -webkit-appearance: none;
   margin: 0;
 }
 
-table#wishlist-table td:nth-child(2) input[type="number"]::-ms-clear {
+table#wishlist-table td:nth-child(5) input[type="number"]::-ms-clear {
   display: none;
 }
 
 table#wishlist-table th {
+  border-bottom: 2px solid var(--white);
+  padding-bottom: 0.45rem;
   white-space: nowrap;
 }
 
 table#wishlist-table th:first-child,
 table#wishlist-table td:first-child {
   text-align: left;
-  width: 50%;
+  width: 36%;
 }
 
 table#wishlist-table td {
-  font-size: 0.8em;
+  font-size: 0.85rem;
   color: var(--black);
   text-align: center;
   width: 10%;
@@ -1102,6 +1116,25 @@ table#wishlist-table td {
 
 table#wishlist-table th:nth-child(2),
 table#wishlist-table td:nth-child(2) {
+  text-align: left;
+  width: 10%;
+  white-space: nowrap;
+}
+
+table#wishlist-table th:nth-child(3),
+table#wishlist-table td:nth-child(3) {
+  text-align: center;
+  width: 14%;
+}
+
+table#wishlist-table th:nth-child(4),
+table#wishlist-table td:nth-child(4) {
+  text-align: center;
+  width: 10%;
+}
+
+table#wishlist-table th:nth-child(5),
+table#wishlist-table td:nth-child(5) {
   text-align: center;
   width: 10%;
 }
@@ -1114,7 +1147,8 @@ table#wishlist-table input[type="number"] {
   border: 2px solid var(--black);
   border-radius: 1rem;
   color: var(--black);
-  font-size: 0.95rem;
+  font-family: inherit;
+  font-size: inherit;
   transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
@@ -1127,18 +1161,20 @@ table#wishlist-table input[type="number"]:focus {
 table#wishlist-table th:last-child,
 table#wishlist-table td:last-child {
   text-align: right;
+  width: 18%;
 }
 
 table#wishlist-table select {
   text-align: center;
-  background-color: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  min-width: 80px;
-  width: 10%;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  min-width: 0;
+  max-width: 100%;
   box-sizing: border-box;
-  padding: 5px 10px;
-  font-size: 0.9em;
+  padding: 0.2rem;
+  font-family: inherit;
+  font-size: inherit;
   color: var(--ink);
   appearance: none;
   -webkit-appearance: none;
@@ -1147,8 +1183,50 @@ table#wishlist-table select {
 }
 
 table#wishlist-table select:hover {
-  background-color: var(--white);
-  border-color: var(--black);
+  color: var(--alpha-green);
+}
+
+table#wishlist-table select:focus {
+  color: var(--alpha-green);
+  box-shadow: none;
+  outline: none;
+}
+
+table#wishlist-table .td-total {
+  white-space: nowrap;
+}
+
+.wishlist-row-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  margin-left: 0;
+  margin-right: 0.35rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--black);
+  font-family: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.wishlist-row-action:hover,
+.wishlist-row-action:focus-visible {
+  color: var(--alpha-red);
+  background: transparent;
+  outline: none;
+}
+
+.wishlist-duplicate-row:hover,
+.wishlist-duplicate-row:focus-visible,
+.wishlist-restore-row:hover,
+.wishlist-restore-row:focus-visible {
+  color: var(--alpha-green);
+  background: transparent;
 }
 
 .grand-total {
