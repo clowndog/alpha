@@ -1,89 +1,72 @@
-# What Grows Here? Web Integration Project Notes
+# Alpha Nurseries Site Notes
 
-This document summarizes the current status, setup, and future roadmap for integrating the "What Grows Here?" GIS functionality into the Alpha Nurseries website.
+This repository contains the static Alpha Nurseries website.
 
----
+## Current Site Shape
 
-## 1. Current Status (As of January 1, 2026)
+- `index.html` is the homepage. It includes the video intro, short company/about copy, and footer.
+- `catalog.html` is the main plant catalog. It loads local catalog data from `data.json`.
+- `wishlist.html` stores selected catalog items in `localStorage` and sends inquiries with EmailJS.
+- `resources.html` contains greetings, FAQ, legal terms, and nursery/resource information.
+- `gis.html` and `gis.js` are still present, but the GIS feature is effectively frozen for now.
 
-The web frontend (`gis.html`, `gis.js`, `styles.css`) is now successfully communicating with the Python Flask backend deployed on Render, and key GIS features are operational.
+## Core Runtime Files
 
-**Working Features on `http://localhost:8888/gis.html`:**
-*   **Frontend-Backend Communication:** Local web frontend (`http://localhost:8888`) successfully fetches data from the Render-deployed backend (`https://alpha-gis.onrender.com`).
-*   **CORS Resolved:** Cross-Origin Resource Sharing issues between local frontend and Render backend are resolved.
-*   **State/County Dropdowns:** Populated dynamically from the backend.
-*   **Plant Species List:** After selecting a county and searching, a list of native species is displayed below the map.
-*   **Interactive Heatmap:** The map displays a choropleth (color-coded) heatmap, showing species similarity to the selected county across the U.S.
-*   **Heatmap Legend:** A dynamic legend explains the color scale for the heatmap.
-*   **Map Aesthetic:** The base map uses a lighter, monochromatic tile layer (`CartoDB Positron`) for better visual integration with the heatmap.
-*   **General Styling:** Resolved initial text visibility and spacing issues for results and map.
+- `styles.css` contains the shared design system, palette, responsive header/nav, catalog cards, wishlist, resources, GIS, and footer styles.
+- `navigation.js` controls the hamburger menu and Resources submenu.
+- `catalog.js` renders catalog cards from `data.json`.
+- `wishlist.js` renders the wishlist and sends email inquiries.
+- `animation.js` controls homepage intro/fade behavior.
+- `resources.js` controls Resources page section navigation.
 
-## 2. Project Architecture & Setup
+## Catalog Data Flow
 
-This project uses a split architecture:
+The catalog now uses a local JSON file:
 
-*   **Frontend Repository (`clowndog/alpha`):**
-    *   **Local Path:** `/Users/stephenbusscher/alpha`
-    *   **GitHub:** `https://github.com/clowndog/alpha`
-    *   **Key Files Modified:**
-        *   `gis.html`: Added a container for the heatmap legend.
-        *   `gis.js`: Configured API URL to Render backend, updated map tile layer, implemented heatmap drawing logic, added heatmap legend population, fixed FIPS matching for GeoJSON.
-        *   `styles.css`: Added styling for heatmap legend, adjusted styling for results display.
-    *   **Local Web Server Command:** `cd /Users/stephenbusscher/alpha && python3 -m http.server 8888` (Access via `http://localhost:8888/gis.html`)
+```js
+fetch("data.json")
+```
 
-*   **Backend Repository (`clowndog/gis`):**
-    *   **Local Path:** `/Users/stephenbusscher/gis` (renamed from `Alpha_Nurseries` for clarity)
-    *   **GitHub:** `https://github.com/clowndog/gis`
-    *   **Render Deployment:** `alpha_gis` service
-    *   **Render Service URL:** `https://alpha-gis.onrender.com`
-    *   **Key Files Modified:**
-        *   `app.py`: Updated CORS policy to allow requests from `http://localhost:8888` (for local frontend testing).
-    *   **Local Flask Server Command (for backend debugging if needed):** `cd /Users/stephenbusscher/gis/WhatGrowsHere_App/webapp && /opt/homebrew/bin/python3.10 app.py` (The `app.py` is configured to run on `http://localhost:5001` or `http://localhost:5002` if previously changed). **Note:** This local server is generally not needed when testing with the Render deployment.
+To refresh catalog data from a new Excel price list:
 
----
+```bash
+python3 -m pip install -r requirements.txt
+python3 scripts/import-catalog.py "assets/2026-27 Price List.xlsx"
+```
 
-## 3. Comparison with "What Grows Here? MacApp"
+The importer writes `data.json`. After importing, review the catalog locally before committing.
 
-The MacApp (`/Users/stephenbusscher/Downloads/WhatGrowsHere_MacApp/what_grows_here_gui.py`) offers a richer set of features compared to the current web emulation. The `clowndog/gis` backend, being derived from the MacApp's core logic (`SpeciesDatabase`), already exposes some of these capabilities via its API.
+## Local Preview
 
-**Features in MacApp (Missing from Current Web Frontend):**
-1.  **Statistics Dashboard:** Detailed species diversity summary for a county (breakdown by source, category counts).
-2.  **County Comparison Tool:** Compare species lists between two counties (unique, common).
-3.  **Species Search (Reverse Lookup):** Search for a plant and find all counties where it grows.
-4.  **Planting List (Cart):** User can add species, manage notes, save/load persistent lists.
-5.  **PDF Export:** Generate formatted reports (species lists, stats, planting list).
-6.  **"Recent Searches" History:** Quick access to past county lookups.
-7.  **Filter Results:** Client-side filtering of displayed species lists.
-8.  **Dark Mode:** UI theme preference.
+Run a static server from the repo root:
 
----
+```bash
+python3 -m http.server 8891
+```
 
-## 4. Future Roadmap & Priorities
+Then open:
 
-Based on discussions, not all MacApp features need immediate web emulation.
+```text
+http://localhost:8891/
+```
 
-**Immediate Next Steps / High Priority Features:**
-The most impactful next features to integrate into the web frontend, leveraging existing backend capabilities, are likely:
-*   **Statistics Dashboard:** Displaying detailed species statistics for a selected county.
-*   **Species Search (Reverse Lookup):** Allowing users to search for a plant and see where it grows.
+## Design Direction
 
-**Medium / Lower Priority Features:**
-*   **County Comparison Tool:** More complex UI but valuable.
-*   **Planting List:** Requires client-side state management (local storage/user accounts) and possibly more complex UI.
-*   **PDF Export:** Can be done client-side with JavaScript libraries (e.g., `jsPDF`) or via new backend endpoints.
-*   **Filtering Results:** An enhancement for the species list.
-*   **"Recent Searches" History:** User experience improvement.
-*   **Dark Mode:** Aesthetic improvement.
+The site is being streamlined around a small palette:
 
----
+- Red: `--alpha-red`
+- Green: `--alpha-green`
+- Neutrals: black, white, muted grays
+- Page backgrounds: cream and wishlist gray
 
-## 5. Backend Deployment Note (Render)
+Keep new styling aligned to the shared variables in `styles.css`. Avoid introducing extra accent colors.
 
-**Render is currently a short-term solution for the backend.** While convenient for testing, it may occasionally shut off (due to being on a free tier or inactivity). For a production-ready and consistently available backend, a different hosting solution (e.g., paid Render tier, another cloud provider) or alternative deployment strategy will be necessary.
+## Archive
 
----
+Older files and standalone snippets live under `archive/`.
 
-Remember to `cd` into the correct local repository (`/Users/stephenbusscher/alpha` for frontend changes, `/Users/stephenbusscher/gis` for backend changes) before making Git operations.
+- `archive/old-code/` contains historical versions and retired experiments.
+- `archive/snippets/` contains standalone snippets that are not currently wired into the live pages.
+- `archive/local-backups/` is ignored by Git and can hold local backup zips or temporary recovery files.
 
----
-This document provides a comprehensive overview for you and your brother to pick up where we left off.
+Live pages should not depend on anything in `archive/`.
