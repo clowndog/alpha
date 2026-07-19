@@ -10,10 +10,6 @@
       }
     </style>
     <link rel="stylesheet" href="styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
     <script src="navigation.js" defer></script>
     <script src="catalog.js" defer></script>
     <title>Catalog</title>
@@ -33,7 +29,7 @@
         >
           <span class="resources-text-arrow">
             Resources
-            <i class="fas fa-chevron-down arrow"></i>
+            <span class="icon icon-chevron-down arrow" aria-hidden="true"></span>
           </span>
         </a>
         <div id="resources" style="display: none" class="resource-links">
@@ -52,10 +48,10 @@
         <p>Find plant sizing & pricing by name & category.</p>
       </header>
       <button id="wishlist-submit-button" class="wishlist-heart">
-        <i class="fas fa-heart"></i><span id="wishlist-count-display">0</span>
+        <span class="icon icon-heart" aria-hidden="true"></span><span id="wishlist-count-display">0</span>
       </button>
       <button id="clear-wishlist" class="wishlist-clear-btn">
-        <i class="fas fa-times"></i>
+        <span class="icon icon-x" aria-hidden="true"></span>
       </button>
       <div class="search-wrapper">
         <input

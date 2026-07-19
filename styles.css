@@ -326,6 +326,64 @@ body:has(#video-container)::before {
   display: none;
 }
 
+.icon {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 auto;
+  line-height: 1;
+  color: currentColor;
+}
+
+.icon-chevron-down,
+.icon-chevron-up {
+  width: 0.72em;
+  height: 0.72em;
+  border-right: 0.14em solid currentColor;
+  border-bottom: 0.14em solid currentColor;
+}
+
+.icon-chevron-down {
+  transform: rotate(45deg) translateY(-0.08em);
+}
+
+.icon-chevron-up {
+  transform: rotate(225deg) translateY(-0.08em);
+}
+
+.icon-heart::before {
+  content: "♥";
+  display: block;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.icon-x {
+  width: 0.72em;
+  height: 0.72em;
+}
+
+.icon-x::before,
+.icon-x::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 0.14em;
+  background: currentColor;
+  border-radius: 999px;
+}
+
+.icon-x::before {
+  transform: rotate(45deg);
+}
+
+.icon-x::after {
+  transform: rotate(-45deg);
+}
+
 .openbtn {
   position: fixed;
   top: var(--page-edge);
@@ -390,13 +448,13 @@ body:has(#video-container)::before {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1em;
-  height: 1em;
+  width: 0.72em;
+  height: 0.72em;
   cursor: pointer;
   transition: transform 333ms ease-out, color 333ms;
   color: var(--nav-muted);
   text-align: center;
-  font-size: 0.62em;
+  font-size: 0.72em;
   line-height: 1;
   transform: translateY(0.04em);
   transform-origin: center;
@@ -404,11 +462,6 @@ body:has(#video-container)::before {
 
 .arrow.expanded {
   transform: translateY(0.04em) rotate(180deg);
-}
-
-.arrow::before {
-  display: block;
-  line-height: 1;
 }
 
 .resource-links {
@@ -450,7 +503,7 @@ body:has(#video-container)::before {
   outline: none;
 }
 
-.wishlist-heart i {
+.wishlist-heart .icon-heart {
   display: block;
   font-size: var(--wishlist-icon-size);
   line-height: 1;
@@ -472,11 +525,11 @@ body:has(#video-container)::before {
   cursor: pointer;
 }
 
-.wishlist-heart:hover i {
+.wishlist-heart:hover .icon-heart {
   color: var(--black);
 }
 
-.wishlist-heart:active i {
+.wishlist-heart:active .icon-heart {
   color: var(--black);
 }
 
@@ -545,7 +598,7 @@ body:has(#video-container)::before {
   transition: color 100ms ease, background-color 100ms ease, transform 100ms ease;
 }
 
-.wishlist-button i {
+.wishlist-button .icon-heart {
   display: block;
   font-size: 1rem;
   line-height: 1;
@@ -873,7 +926,7 @@ input::-webkit-search-cancel-button {
   z-index: 1201;
 }
 
-.toggle-arrow i {
+.toggle-arrow .icon {
   line-height: 1;
 }
 

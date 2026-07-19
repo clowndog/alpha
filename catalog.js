@@ -253,7 +253,8 @@ const createUserCards = (data) => {
     });
 
     const wishlistButton = document.createElement("button");
-    wishlistButton.innerHTML = '<i class="fas fa-heart" aria-hidden="true"></i>';
+    wishlistButton.innerHTML =
+      '<span class="icon icon-heart" aria-hidden="true"></span>';
     wishlistButton.setAttribute("aria-label", `Add ${name} to wishlist`);
     wishlistButton.setAttribute(
       "aria-pressed",
