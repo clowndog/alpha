@@ -1,34 +1,42 @@
 // search
 
 const searchInput = document.querySelector("#data-search");
+const categoryFilter = document.querySelector("#category-filter");
 
-searchInput.addEventListener("input", (e) => {
-  const value = e.target.value.toLowerCase();
+const getCategory = (type) => {
+  if (!type) return "";
+  if (type.includes("Shrubs")) return "Shrubs";
+  if (type.includes("Small Trees")) return "Small Trees";
+  if (type.includes("Large Trees")) return "Large Trees";
+  if (type.includes("Bigger Stuff")) return "Bigger Stuff";
+  return type;
+};
+
+const updateCatalogFilters = () => {
+  const value = searchInput.value.toLowerCase();
+  const selectedCategory = categoryFilter.value;
+
   allUsers.forEach((user) => {
     const isVisible =
-      user.name.toLowerCase().includes(value) ||
-      user.body.toLowerCase().includes(value) ||
-      (user.type && user.type.toLowerCase().includes(value));
+      (selectedCategory === "all" || user.categories.includes(selectedCategory)) &&
+      (user.name.toLowerCase().includes(value) ||
+        user.body.toLowerCase().includes(value) ||
+        (user.type && user.type.toLowerCase().includes(value)));
     user.element.classList.toggle("hide", !isVisible);
   });
-});
+};
+
+const resetCatalogFilters = () => {
+  searchInput.value = "";
+  categoryFilter.value = "all";
+  updateCatalogFilters();
+};
+
+searchInput.addEventListener("input", updateCatalogFilters);
+categoryFilter.addEventListener("change", updateCatalogFilters);
+window.addEventListener("pageshow", resetCatalogFilters);
 
 // cards
-
-const toggleResourceMode = (isChecked) => {
-  body.style.filter = isChecked ? "invert(1)" : "";
-  body.classList.toggle("resource-mode", isChecked);
-};
-
-const updateMainHeaderAndParagraph = (isResourceModeEnabled) => {
-  const mainHeader = document.querySelector(".main h1");
-  const mainParagraph = document.querySelector(".main p");
-
-  mainHeader.textContent = isResourceModeEnabled ? "Resource Mode" : "Catalog";
-  mainParagraph.textContent = isResourceModeEnabled
-    ? "Discover more information about Native Plants."
-    : "A new way to find plant sizing & pricing by name & category.";
-};
 
 const createElement = (element, content) => {
   const el = document.createElement(element);
@@ -41,6 +49,11 @@ const createTableHeaders = (headers) =>
 
 const createTableRow = (rowData) =>
   createElement("tr", rowData.map((data) => `<td>${data ?? ""}</td>`).join(""));
+
+const formatPrice = (price) => {
+  const numericPrice = parseFloat(price);
+  return Number.isFinite(numericPrice) ? `$${numericPrice.toFixed(2)}` : "—";
+};
 
 const getWishlist = () => {
   const wishlist = localStorage.getItem("wishlist");
@@ -76,7 +89,7 @@ const removeFromWishlist = (cardName) => {
 
 const handleWishlistButtonClick = (event) => {
   event.stopPropagation();
-  const button = event.target;
+  const button = event.currentTarget;
   button.classList.toggle("active");
 
   const cardName = button.dataset.cardName;
@@ -86,8 +99,10 @@ const handleWishlistButtonClick = (event) => {
 
   if (wishlist.some((item) => item.name === cardName)) {
     removeFromWishlist(cardName);
+    button.setAttribute("aria-pressed", "false");
   } else {
     addToWishlist(cardName, user);
+    button.setAttribute("aria-pressed", "true");
   }
 
   updateWishlistCount();
@@ -118,121 +133,80 @@ document
   .getElementById("clear-wishlist")
   .addEventListener("click", clearWishlist);
 
-const slider = document.getElementById("slider");
-const body = document.body;
 const userCardContainer = document.querySelector("[data-user-cards-container]");
 const wishlistCountDisplay = document.getElementById("wishlist-count-display");
 
-const updateResourceMode = () => {
-  const isResourceModeEnabled = slider.checked;
-  toggleResourceMode(isResourceModeEnabled);
-  updateMainHeaderAndParagraph(isResourceModeEnabled);
-
+const updateCardTables = () => {
   allUsers.forEach(({ element, summaries }) => {
     const summary = element.querySelector("[data-summary]");
-    const table = createResourceModeTable(isResourceModeEnabled, summaries);
+    const table = createCardTable(summaries);
     summary.innerHTML = "";
     summary.append(table);
   });
 };
 
-const createResourceModeTable = (isResourceModeEnabled, summaries) => {
+const createCardTable = (summaries) => {
   const table = document.createElement("table");
 
-  const tableHeaders = isResourceModeEnabled
-    ? createTableHeaders([])
-    : createTableHeaders(["Size", "Age", "500+", "100+", "25+", "1+"]);
+  const tableHeaders = createTableHeaders([
+    "Size",
+    "Age",
+    "500+",
+    "100+",
+    "25+",
+    "1+",
+  ]);
 
   table.append(tableHeaders);
 
-  if (isResourceModeEnabled) {
-    const descriptionSummary = summaries.find(
-      (summary) => summary?.description
-    );
+  summaries.forEach((summary) => {
+    const { size, age, prices } = summary;
+    const tableRow = createTableRow([
+      size,
+      age || "—",
+      formatPrice(prices.fivehundredprice),
+      formatPrice(prices.onehundredprice),
+      formatPrice(prices.twentyfiveprice),
+      formatPrice(prices.oneprice),
+    ]);
 
-    if (descriptionSummary) {
-      const tableRow = document.createElement("tr");
-      tableRow.classList.add("table-row");
+    tableRow.dataset.oneprice = prices.oneprice;
+    tableRow.dataset.twentyfiveprice = prices.twentyfiveprice;
+    tableRow.dataset.onehundredprice = prices.onehundredprice;
+    tableRow.dataset.fivehundredprice = prices.fivehundredprice;
 
-      const descriptionCell = document.createElement("td");
-      descriptionCell.classList.add("description-additional");
-
-      const descriptionContainer = document.createElement("div");
-      descriptionContainer.classList.add("description-container");
-      descriptionContainer.innerHTML = descriptionSummary.description;
-      descriptionCell.append(descriptionContainer);
-
-      const treeSvgCell = document.createElement("td");
-      const treeSvgContainer = document.createElement("div");
-      treeSvgContainer.classList.add("tree-svg-container");
-      treeSvgContainer.innerHTML =
-        "<img class='tree-svg' src='assets/tree.svg' alt='Tree Icon'>";
-      treeSvgCell.append(treeSvgContainer);
-
-      const symbolsCell = document.createElement("td");
-      const buttonContainer = document.createElement("div");
-      buttonContainer.classList.add("button-container");
-
-      const symbols = ["🍋", "💧", "🪨", "☀️"];
-      symbols.forEach((symbol) => {
-        const circleButton = document.createElement("div");
-        circleButton.classList.add("circle-button");
-        circleButton.classList.add("symbol");
-        circleButton.textContent = symbol;
-        buttonContainer.append(circleButton);
-      });
-
-      symbolsCell.append(buttonContainer);
-
-      tableRow.append(descriptionCell, treeSvgCell, symbolsCell);
-      table.append(tableRow);
-    }
-  } else {
-    summaries.forEach((summary) => {
-      const { size, age, prices } = summary;
-      const tableRow = createTableRow([
-        size,
-        age,
-        prices.fivehundredprice,
-        prices.onehundredprice,
-        prices.twentyfiveprice,
-        prices.oneprice,
-      ]);
-
-      tableRow.dataset.oneprice = prices.oneprice;
-      tableRow.dataset.twentyfiveprice = prices.twentyfiveprice;
-      tableRow.dataset.onehundredprice = prices.onehundredprice;
-      tableRow.dataset.fivehundredprice = prices.fivehundredprice;
-
-      table.append(tableRow);
-    });
-  }
+    table.append(tableRow);
+  });
 
   return table;
 };
 
-slider.addEventListener("change", () => updateResourceMode());
-
 const userCardTemplate = document.querySelector("[data-user-template]");
 let allUsers = [];
 
-fetch("https://raw.githubusercontent.com/clowndog/alpha/main/data.json")
+fetch("data.json")
   .then((res) => res.json())
   .then((data) => {
     allUsers = createUserCards(data);
-    updateResourceMode();
+    updateCardTables();
+    resetCatalogFilters();
+    setTimeout(resetCatalogFilters, 0);
     updateWishlistCount();
   });
 
 const createUserCards = (data) => {
   const uniqueNames = [...new Set(data.map(({ name }) => name))];
   const userCards = [];
+  const wishlist = getWishlist();
 
   uniqueNames.forEach((name) => {
     const usersWithName = data.filter(
       ({ name: userName }) => userName === name
     );
     const { latin: body, type } = usersWithName[0];
+    const categories = [
+      ...new Set(usersWithName.map((user) => getCategory(user.type))),
+    ];
 
     const card = userCardTemplate.content.cloneNode(true).children[0];
     const header = card.querySelector("[data-header]");
@@ -265,16 +239,32 @@ const createUserCards = (data) => {
       };
     });
 
-    userCards.push({ name, body, type, summaries, element: card });
+    userCards.push({
+      name,
+      body,
+      type,
+      categories,
+      summaries,
+      element: card,
+    });
 
     card.addEventListener("click", () => {
       card.classList.toggle("expanded");
     });
 
     const wishlistButton = document.createElement("button");
-    wishlistButton.textContent = "♥";
+    wishlistButton.innerHTML = '<i class="fas fa-heart" aria-hidden="true"></i>';
+    wishlistButton.setAttribute("aria-label", `Add ${name} to wishlist`);
+    wishlistButton.setAttribute(
+      "aria-pressed",
+      wishlist.some((item) => item.name === name) ? "true" : "false"
+    );
     wishlistButton.dataset.cardName = name;
     wishlistButton.classList.add("wishlist-button");
+    wishlistButton.classList.toggle(
+      "active",
+      wishlist.some((item) => item.name === name)
+    );
     wishlistButton.addEventListener("click", handleWishlistButtonClick);
 
     card.appendChild(wishlistButton);

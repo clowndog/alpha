@@ -6,23 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wishlist</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="navigation.js" defer></script>
-    <script src="wishlist.js" defer></script>
     <script
       type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+      defer
     ></script>
+    <script src="navigation.js" defer></script>
+    <script src="wishlist.js" defer></script>
   </head>
   <body class="wishlistbackground">
-    <img src="assets/logo.png" alt="Company Logo" class="logomain" />
+    <a href="index.html" class="logo-link" aria-label="Alpha Nurseries home">
+      <img src="assets/logo.png" alt="Company Logo" class="logomain" />
+    </a>
     <nav id="mySidebar" class="sidebar">
-        <a href="#" class="closebtn" onclick="closeNav()">×</a>
+        <a href="index.html">Home</a>
         <a href="catalog.html">Catalog</a>
         <a
           href="#"
           id="arrow"
           onclick="expandResources();"
-          style="align-items: center"
         >
           <span class="resources-text-arrow">
             Resources
@@ -36,14 +38,14 @@
           <a href="gis.html" class="small-link">Plant GIS</a>
         </div>
         <a href="bearlake.html">Bear Lake</a>
-        <a href="about.html">About</a>
       </nav>
     <button class="openbtn" onclick="openNav()">☰</button>
-    <div class="main">
-      <br />
-      <br />
-      <h1>Wishlist</h1>
-      <p>Fill out your information and send us an inquiry.</p>
+    <main class="main page-content">
+      <div class="headspacer"></div>
+      <header class="page-header">
+        <h1>Wishlist</h1>
+        <p>Fill out your information and send us an inquiry.</p>
+      </header>
       <ul id="wishlist-items"></ul>
       <form
         id="email-form"
@@ -129,13 +131,15 @@
           <br />
         </div>
         <input type="submit" value="Send" id="send-button" />
-        <div id="thankyou" class="hide">
-          <h1>
-            Thanks for sending your Wishlist, we will be contacting you shortly.
-          </h1>
+        <div id="email-status" class="email-status hide" role="status" aria-live="polite">
+          <div class="email-status-icon" aria-hidden="true"></div>
+          <div>
+            <h2 id="email-status-title">Sending wishlist...</h2>
+            <p id="email-status-message">Please keep this page open for a moment.</p>
+          </div>
         </div>
       </form>
       <br />
-    </div>
+    </main>
   </body>
 </html>

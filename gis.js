@@ -147,10 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 7. Draw Heatmap on the map
   function drawHeatmap(heatmapData, maxScore) {
-    console.log('drawHeatmap called:'); // RE-ADDED DEBUG LOG
-    console.log('  maxScore:', maxScore); // RE-ADDED DEBUG LOG
-    console.log('  heatmapData sample:', Object.entries(heatmapData).slice(0, 5)); // RE-ADDED DEBUG LOG
-    window.logCounter = 0; // Reset counter for limited logging
+
 
 
     if (geojsonLayer) {
@@ -177,13 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
       style: function(feature) {
         const fips = feature.id; // Corrected: FIPS is in feature.id
         const score = heatmapData[fips] || 0;
-        const ratio = maxScore > 0 ? score / maxScore : 0; // RE-ADDED for logging
-        
-        // RE-ADDED DEBUG LOG, now with a limit
-        if (window.logCounter < 20) { // Log only first 20 features
-            console.log('  Feature FIPS:', fips, 'Score:', score, 'Ratio:', ratio.toFixed(2), 'Color:', getColor(score));
-            window.logCounter++;
-        }
         
         return {
           fillColor: getColor(score),
@@ -213,6 +203,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     }).addTo(map);
+
+    // Populate and show the legend
+    const legendContent = `
+        <h4>Species Similarity to Selected County</h4>
+        <p style="margin-top: 0.5rem; margin-bottom: 1rem;">The map colors indicate how many native plant species a county shares with your selected location.</p>
+        <div class="legend-item"><span class="legend-color-box" style="background-color:${getColor(maxScore * 0.8)};"></span><span>High Match (>75% similar)</span></div>
+        <div class="legend-item"><span class="legend-color-box" style="background-color:${getColor(maxScore * 0.51)};"></span><span>Medium Match (50-75% similar)</span></div>
+        <div class="legend-item"><span class="legend-color-box" style="background-color:${getColor(maxScore * 0.26)};"></span><span>Low Match (25-50% similar)</span></div>
+        <div class="legend-item"><span class="legend-color-box" style="background-color:${getColor(maxScore * 0.06)};"></span><span>Very Low Match (5-25% similar)</span></div>
+        <div class="legend-item"><span class="legend-color-box" style="background-color:${getColor(maxScore * 0.01)};"></span><span>Minimal Match (0-5% similar)</span></div>
+        <div class="legend-item"><span class="legend-color-box" style="background-color:${getColor(0)};"></span><span>No Match</span></div>
+    `;
+    heatmapLegendDiv.innerHTML = legendContent;
+    heatmapLegendDiv.style.display = 'block';
   }
 
 

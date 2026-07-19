@@ -33,18 +33,24 @@ function formatPhoneNumber(input) {
   }
 }
 
-const userEmail = "stephenbusscher@gmail.com";
+const EMAILJS_SERVICE_ID = "service_dqgba86";
+const EMAILJS_TEMPLATE_ID = "template_5x4lgtb";
+const EMAILJS_PUBLIC_KEY = "RYRyCisbSaLO-meXP";
 
 const getWishlist = () => {
   const wishlist = localStorage.getItem("wishlist");
   return wishlist ? JSON.parse(wishlist) : [];
 };
 
+const parsePrice = (price) => parseFloat(String(price).replace("$", "")) || 0;
+
+const formatMoney = (amount) => `$${amount.toFixed(2)}`;
+
 function calculateTotal(quantity, prices) {
-  const oneprice = parseFloat(prices.oneprice) || 0;
-  const twentyfiveprice = parseFloat(prices.twentyfiveprice) || 0;
-  const onehundredprice = parseFloat(prices.onehundredprice) || 0;
-  const fivehundredprice = parseFloat(prices.fivehundredprice) || 0;
+  const oneprice = parsePrice(prices.oneprice);
+  const twentyfiveprice = parsePrice(prices.twentyfiveprice);
+  const onehundredprice = parsePrice(prices.onehundredprice);
+  const fivehundredprice = parsePrice(prices.fivehundredprice);
 
   if (quantity >= 500) {
     return quantity * fivehundredprice;
@@ -70,10 +76,10 @@ function updateGrandTotal() {
     let grandTotal = 0;
     enabledRows.forEach((row) => {
       const totalElement = row.querySelector(".td-total");
-      const total = parseFloat(totalElement && totalElement.textContent) || 0;
+      const total = parsePrice(totalElement && totalElement.textContent);
       grandTotal += total;
     });
-    grandTotalElement.textContent = grandTotal.toFixed(2);
+    grandTotalElement.textContent = formatMoney(grandTotal);
   }
 }
 
@@ -140,6 +146,19 @@ const createWishlistTable = () => {
     quantityInput.type = "number";
     quantityInput.min = "0";
     quantityInput.value = "0";
+    quantityInput.classList.add("quantity-input");
+
+    quantityInput.addEventListener("focus", () => {
+      if (quantityInput.value === "0") {
+        quantityInput.select();
+      }
+    });
+
+    quantityInput.addEventListener("blur", () => {
+      if (quantityInput.value === "") {
+        quantityInput.value = "0";
+      }
+    });
 
     quantityInput.addEventListener("input", () => {
       const size = sizeSelector.value;
@@ -157,7 +176,7 @@ const createWishlistTable = () => {
         onehundredprice: tr.dataset.onehundredprice,
         fivehundredprice: tr.dataset.fivehundredprice,
       });
-      tdTotal.textContent = total.toFixed(2);
+      tdTotal.textContent = formatMoney(total);
       updateGrandTotal();
     });
 
@@ -178,7 +197,7 @@ const createWishlistTable = () => {
         fivehundredprice: tr.dataset.fivehundredprice,
       });
 
-      tdTotal.textContent = total.toFixed(2);
+      tdTotal.textContent = formatMoney(total);
       updateGrandTotal();
     });
 
@@ -196,7 +215,7 @@ const createWishlistTable = () => {
       onehundredprice: tr.dataset.onehundredprice,
       fivehundredprice: tr.dataset.fivehundredprice,
     });
-    tdTotal.textContent = initialTotal.toFixed(2);
+    tdTotal.textContent = formatMoney(initialTotal);
 
     const xButton = document.createElement("button");
     xButton.textContent = "x";
@@ -254,11 +273,26 @@ const createWishlistTable = () => {
   tbody.appendChild(emptyRow);
 };
 
-emailjs.init("RYRyCisbSaLO-meXP");
+if (window.emailjs) {
+  emailjs.init({
+    publicKey: EMAILJS_PUBLIC_KEY,
+  });
+} else {
+  console.error("EmailJS failed to load.");
+}
 
 document.getElementById("email-form").addEventListener("submit", (event) => {
   event.preventDefault();
 
+  if (!window.emailjs) {
+    alert("Email service is not available. Please try again later.");
+    return;
+  }
+
+  const sendButton = document.getElementById("send-button");
+  const emailStatus = document.getElementById("email-status");
+  const emailStatusTitle = document.getElementById("email-status-title");
+  const emailStatusMessage = document.getElementById("email-status-message");
   const customerName = document.getElementById("customer-name").value;
   const customerPhone = document.getElementById("customer-phone").value;
   const customerEmail = document.getElementById("customer-email").value;
@@ -312,31 +346,51 @@ document.getElementById("email-form").addEventListener("submit", (event) => {
   formattedTable += `Grand Total: ${grandTotal}\n`;
 
   document.getElementById("formatted-table").value = formattedTable;
-  const formattedTableValue = document.getElementById("formatted-table").value;
 
   const emailParams = {
-    customerName: customerName,
-    customerPhone: customerPhone,
-    customerEmail: customerEmail,
-    customerAddress: customerAddress,
-    message: message,
-    wishlist: formattedTable,
+    customerName,
+    customerPhone,
+    customerEmail,
+    customerAddress,
+    message,
     grand_total: grandTotal,
+    wishlist: formattedTable,
+    formatted_table: formattedTable,
+    from_name: customerName,
+    from_email: customerEmail,
+    reply_to: customerEmail,
+    name: customerName,
+    email: customerEmail,
+    phone: customerPhone,
+    address: customerAddress,
   };
 
+  sendButton.disabled = true;
+  sendButton.value = "Sending...";
+  emailStatus.className = "email-status";
+  emailStatusTitle.textContent = "Sending wishlist...";
+  emailStatusMessage.textContent = "Please keep this page open for a moment.";
+
   emailjs
-    .send(
-      "service_v3fnwk5",
-      "template_5x4lgtb",
-      emailParams,
-      "RYRyCisbSaLO-meXP"
-    )
+    .send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, emailParams)
     .then((response) => {
       console.log("Email sent!", response.status, response.text);
       localStorage.removeItem("formData");
+      emailStatus.className = "email-status success";
+      emailStatusTitle.textContent = "Wishlist sent!";
+      emailStatusMessage.textContent =
+        "Thanks — we will contact you shortly.";
     })
     .catch((error) => {
       console.error("Error sending email:", error);
+      const errorMessage = error.text || error.message || JSON.stringify(error);
+      emailStatus.className = "email-status error";
+      emailStatusTitle.textContent = "Email did not send";
+      emailStatusMessage.textContent = errorMessage;
+    })
+    .finally(() => {
+      sendButton.disabled = false;
+      sendButton.value = "Send";
     });
 });
 

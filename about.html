@@ -10,15 +10,16 @@
   </head>
 
   <body>
-    <img src="assets/logo.png" alt="Company Logo" class="logomain" />
+    <a href="index.html" class="logo-link" aria-label="Alpha Nurseries home">
+      <img src="assets/logo.png" alt="Company Logo" class="logomain" />
+    </a>
     <nav id="mySidebar" class="sidebar">
-        <a href="#" class="closebtn" onclick="closeNav()">×</a>
+        <a href="index.html">Home</a>
         <a href="catalog.html">Catalog</a>
         <a
           href="#"
           id="arrow"
           onclick="expandResources();"
-          style="align-items: center"
         >
           <span class="resources-text-arrow">
             Resources
@@ -32,14 +33,13 @@
           <a href="gis.html" class="small-link">Plant GIS</a>
         </div>
         <a href="bearlake.html">Bear Lake</a>
-        <a href="about.html">About</a>
       </nav>
     <button class="openbtn" onclick="openNav()">☰</button>
-    <div class="main">
-      <br />
-      <br />
-      <h1>About</h1>
-      <br />
+    <main class="main page-content">
+      <div class="headspacer"></div>
+      <header class="page-header">
+        <h1>About</h1>
+      </header>
       Alpha Nurseries, Inc is a wholesale seedling nursery located in Holland,
       MI. We grow both conifers and broadleaves; in trees and shrubs. We
       specialize in growing bare-root woody plants (no herbaceous, perennials,
@@ -65,6 +65,6 @@
       in larger quantities. Private parties are welcome to order, if they can
       meet the minimum order.
       <br />
-    </div>
+    </main>
   </body>
 </html>

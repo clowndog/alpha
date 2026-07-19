@@ -6,24 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       body {
-        background: linear-gradient(-45deg, #4e5bce, #48a7c9, #46cfaf);
-        background-size: 400% 400%;
-        animation: gradient 15s ease infinite;
-        height: 100vh;
-        z-index: -3;
-        background-attachment: fixed;
-      }
-
-      @keyframes gradient {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
+        background: #f4f1ea;
       }
     </style>
     <link rel="stylesheet" href="styles.css" />
@@ -37,15 +20,16 @@
   </head>
 
   <body>
-    <img src="assets/logo.png" alt="Company Logo" class="logomain" />
+    <a href="index.html" class="logo-link" aria-label="Alpha Nurseries home">
+      <img src="assets/logo.png" alt="Company Logo" class="logomain" />
+    </a>
     <nav id="mySidebar" class="sidebar">
-        <a href="#" class="closebtn" onclick="closeNav()">×</a>
+        <a href="index.html">Home</a>
         <a href="catalog.html">Catalog</a>
         <a
           href="#"
           id="arrow"
           onclick="expandResources();"
-          style="align-items: center"
         >
           <span class="resources-text-arrow">
             Resources
@@ -59,42 +43,47 @@
           <a href="gis.html" class="small-link">Plant GIS</a>
         </div>
         <a href="bearlake.html">Bear Lake</a>
-        <a href="about.html">About</a>
       </nav>
     <button class="openbtn" onclick="openNav()">☰</button>
-    <div class="main">
-      <div class="headspacer"></div>
-      <h1>Catalog</h1>
-      <p>A new way to find plant sizing & pricing by name & category.</p>
-      <br />
+    <main class="catalog-page">
+      <header class="main page-header catalog-header">
+        <div class="headspacer"></div>
+        <h1>Catalog</h1>
+        <p>Find plant sizing & pricing by name & category.</p>
+      </header>
       <button id="wishlist-submit-button" class="wishlist-heart">
         <i class="fas fa-heart"></i><span id="wishlist-count-display">0</span>
       </button>
       <button id="clear-wishlist" class="wishlist-clear-btn">
         <i class="fas fa-times"></i>
       </button>
-      <br />
-    </div>
-    <div class="search-wrapper">
-      <img src="assets/searchiconblack.png" alt="Search Icon" class="icon" />
-      <input
-        type="search"
-        id="data-search"
-        name="search"
-        placeholder="Type to search"
-      />
-      <div class="filter-wrapper">
-        <label class="switch">
-          <input type="checkbox" id="slider" />
-          <span class="slider round"></span>
-        </label>
+      <div class="search-wrapper">
+        <input
+          type="search"
+          id="data-search"
+          name="search"
+          placeholder="Type to search"
+          autocomplete="off"
+        />
+        <select
+          id="category-filter"
+          aria-label="Filter catalog by category"
+          autocomplete="off"
+        >
+          <option value="all">All Categories</option>
+          <option value="Spruce">Spruce</option>
+          <option value="Fir">Fir</option>
+          <option value="Pine">Pine</option>
+          <option value="Shrubs">Shrubs</option>
+          <option value="Small Trees">Small Trees</option>
+          <option value="Large Trees">Large Trees</option>
+          <option value="Bigger Stuff">Bigger Stuff</option>
+        </select>
       </div>
-    </div>
-    <br />
-    <div class="user-cards" data-user-cards-container></div>
+      <div class="user-cards" data-user-cards-container></div>
+    </main>
     <template data-user-template>
       <div class="card">
-        <button class="wishlist-button" id="wishlist-button">♥</button>
         <div class="header" data-header></div>
         <div class="body" data-body></div>
         <div class="summary" data-summary></div>

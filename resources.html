@@ -14,11 +14,13 @@
 
 <body>
   <div id="top"></div>
-  <img src="assets/logo.png" alt="Company Logo" class="logomain">
+  <a href="index.html" class="logo-link" aria-label="Alpha Nurseries home">
+    <img src="assets/logo.png" alt="Company Logo" class="logomain">
+  </a>
   <nav id="mySidebar" class="sidebar">
-    <a href="#" class="closebtn" onclick="closeNav()">×</a>
+    <a href="index.html">Home</a>
     <a href="catalog.html">Catalog</a>
-    <a href="#" id="arrow" onclick="expandResources();" style="align-items: center">
+    <a href="#" id="arrow" onclick="expandResources();">
       <span class="resources-text-arrow">
         Resources
         <i class="fas fa-chevron-down arrow"></i>
@@ -31,7 +33,6 @@
       <a href="gis.html" class="small-link">Plant GIS</a>
     </div>
     <a href="bearlake.html">Bear Lake</a>
-    <a href="about.html">About</a>
   </nav>
   <button class="openbtn" onclick="openNav()">☰</button>
   <div class="toggle-arrow toggle-up" onclick="scrollToPreviousSection()">
@@ -40,17 +41,17 @@
   <div class="toggle-arrow toggle-down" onclick="scrollToNextSection()">
     <i class="fas fa-chevron-down"></i>
   </div>
-  <div class="main">
+  <div class="main page-content">
     <div class="headspacer"></div>
-    <h1>Resources</h1>
-    <br>
-    <p>Here's where you can find out more about the nursery and check in on our projects!</p>
-    <br>
+    <header class="page-header">
+      <h1>Resources</h1>
+      <p>Find out more about the nursery and our projects.</p>
+    </header>
     <iframe
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116486.15594288487!2d-86.26058432107806!3d42.68359810331929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8819f6d01a69c977%3A0x58a95e534aaa9207!2sAlpha%20Nurseries!5e1!3m2!1sen!2sus!4v1679518783355!5m2!1sen!2sus"
       style="width: 100%; height: 250px; border:4px solid #000;" allowfullscreen="" loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <div class="headspacer" id="greetings"></div>
+    <div class="sectionspacer" id="greetings"></div>
     <h2>Greetings (July 1, 2022)</h2>
     <br>
     Welcome to each of you, past customers and prospective - alike!
@@ -92,8 +93,8 @@
     to our current acreage so we are not able to balance increased demand with increased production.
     <br>
     <br>
-    Now on to <span style="color:#FF0033;font-weight:bold;">what's new </span>or deserves special note: As in prior
-    years, our new native offerings are printed in <span style="color:#FF0033;font-weight:bold;">RED</span> ink.
+    Now on to <span style="color:var(--alpha-red);font-weight:bold;">what's new </span>or deserves special note: As in prior
+    years, our new native offerings are printed in <span style="color:var(--alpha-red);font-weight:bold;">RED</span> ink.
     <br>
     <br>
     <b>Notable misses for this year are:</b>
@@ -107,7 +108,7 @@
     <br>
     <br>
     Difficult to establish plants!! If you see a
-    <span style="color:#FF0033;"><b>
+    <span style="color:var(--alpha-red);"><b>
         red asterisk sign, “ * “</b>
     </span>
     behind a species in the catalog - this indicates a species
@@ -120,7 +121,7 @@
     </span>
     We supply many districts with plants for their annual sales. Since districts generally act as a local distributor,
     we offer a discount on the pricing for those orders compared to normal catalog terms.
-    <span style="color:#FF0033;font-weight:bold;">
+    <span style="color:var(--alpha-red);font-weight:bold;">
       <u>Again in 2022-23, for Conservation Districts</u>: please limit your order to 22 species or less.
     </span>
     <br>
@@ -129,7 +130,7 @@
     </b>
     <br>
     <br>
-    <span style="color:#FF0033;font-weight:bold;">
+    <span style="color:var(--alpha-red);font-weight:bold;">
       Minimum order is $150. Minimum shipping is raised to $37.50 this year</span> <b>- please note. </b>
     </span> Note that if actual cost of shipping product is greater than the flat charge, we will bill you for the
     difference after we ship.
@@ -267,12 +268,12 @@
       deposit due with order.
       <br>
       <br>
-      <span style="color:#FF0033;font-weight:bold;">
+      <span style="color:var(--alpha-red);font-weight:bold;">
         No reductions to orders allowed after March 15th.
       </span>
       <br>
       <br>
-      <span style="color:#FF0033;font-weight:bold;">
+      <span style="color:var(--alpha-red);font-weight:bold;">
         Order Cancellations after March 15th, forfeit 50% of the order.
       </span>
       <br>
@@ -289,7 +290,7 @@
       </span>
       <br>
       <br>
-      <span style="color:#FF0033;font-weight:bold;">
+      <span style="color:var(--alpha-red);font-weight:bold;">
         Shipping: UPS, 15% of total order </span> - or - at cost for actual costs over the 15% charge. FOB, Holland, MI
       <br>
       <br>
@@ -410,27 +411,26 @@
   <div class="container">
     <div class="row">
       <div class="item">
-        <h3>Services</h3>
+        <h3>Resources</h3>
         <ul>
-          <li><a href="#">Product Catalog</a></li>
-          <li><a href="#">Consultation</a></li>
-          <li><a href="#">Resources</a></li>
+          <li><a href="resources.html#greetings">Greetings</a></li>
+          <li><a href="resources.html#faq">FAQs</a></li>
+          <li><a href="resources.html#legal">Legal</a></li>
+          <li><a href="gis.html">Plant GIS</a></li>
         </ul>
       </div>
       <div class="item">
-        <h3>About</h3>
+        <h3>Catalog</h3>
         <ul>
-          <li><a href="#">Mission</a></li>
-          <li><a href="#">Team</a></li>
-          <li><a href="#">Careers</a></li>
+          <li><a href="catalog.html">Plant Catalog</a></li>
+          <li><a href="wishlist.html">Wishlist</a></li>
         </ul>
       </div>
       <div class="item text">
         <h3>Alpha Nurseries, Inc.</h3>
         <p>
-          Alpha Nurseries, Inc is a wholesale seedling nursery located in
-          Holland, MI. We grow both conifers and broadleaves; in trees and
-          shrubs. We specialize in growing bare-root woody plants.
+          Wholesale bare-root plants grown in Holland, MI for restoration,
+          Christmas tree, ornamental, nonprofit, and commercial markets.
         </p>
       </div>
     </div>
@@ -441,7 +441,7 @@
     </div>
     <div class="row">
       <div class="item">
-        <p class="copyright">Alpha Nurseries, Inc. © 2023</p>
+        <p class="copyright">Alpha Nurseries, Inc. © 2026</p>
       </div>
     </div>
   </div>
